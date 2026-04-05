@@ -1,5 +1,5 @@
 <p align="center">
-  <video src="https://raw.githubusercontent.com/Hackerette0/AI-life-manager/main/public/Le%20plan.mp4" autoplay loop muted playsinline width="600"></video>
+  <video src="https://github.com/user-attachments/assets/ae68a26e-42c3-4793-9c53-572b340517ba" autoplay loop muted playsinline width="600"></video>
 </p>
 
 > AI-powered life management — plan your day around how you actually feel.
