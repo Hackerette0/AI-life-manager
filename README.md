@@ -1,4 +1,6 @@
-# le plan
+<p align="center">
+  <img src="public/logo.png" alt="Le plan" width="320" />
+</p>
 
 > AI-powered life management — plan your day around how you actually feel.
 
