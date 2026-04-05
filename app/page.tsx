@@ -10,6 +10,7 @@ import HabitsTracker      from "@/components/HabitsTracker";
 import NotesPanel         from "@/components/NotesPanel";
 import IntegrationsHub    from "@/components/IntegrationsHub";
 import JournalPage        from "@/components/JournalPage";
+import SecondBrain        from "@/components/SecondBrain";
 import {
   AppState, DayContext, DayPlan, Task, WellnessReminder,
   Habit, FocusSession, CalendarEvent, CalendarReminder,
@@ -20,7 +21,7 @@ import {
   getDeepWorkIndex, getHabitStreak,
 } from "@/lib/storage";
 
-type Tab = "vibe" | "planner" | "focus" | "habits" | "notes" | "journal" | "connect";
+type Tab = "vibe" | "planner" | "focus" | "habits" | "notes" | "journal" | "connect" | "brain";
 
 export default function Home() {
   const [state, setState]             = useState<AppState | null>(null);
@@ -120,6 +121,7 @@ export default function Home() {
     { id: "notes",   icon: "edit_note",           label: "Notes"   },
     { id: "journal", icon: "menu_book",           label: "Journal" },
     { id: "connect", icon: "hub",                 label: "Connect" },
+    { id: "brain",   icon: "neurology",           label: "Second Brain" },
   ];
 
   const activeTabLabel = tabs.find((t) => t.id === activeTab)?.label ?? "";
@@ -273,6 +275,12 @@ export default function Home() {
         {activeTab === "journal" && (
           <div className="animate-fade-in">
             <JournalPage habits={state.habits} onUpdateHabits={handleUpdateHabits} />
+          </div>
+        )}
+
+        {activeTab === "brain" && (
+          <div className="animate-fade-in">
+            <SecondBrain state={state} />
           </div>
         )}
 
