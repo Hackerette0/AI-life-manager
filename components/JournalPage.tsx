@@ -140,7 +140,7 @@ export default function JournalPage({ habits, onUpdateHabits }: Props) {
             {/* Rows */}
             {habits.map((habit, hi) => (
               <div key={habit.id} className={`flex items-center py-1 ${hi < habits.length - 1 ? "border-b border-[#F2F2F7]" : ""}`}>
-                <div className="w-28 shrink-0 text-[11px] font-medium text-[#3C3C43] truncate pr-3">{habit.name}</div>
+                <div className="w-28 shrink-0 text-[11px] font-medium text-[#3C3C43] truncate pr-3">{habit.title}</div>
                 {daysArray.map((d) => {
                   const done    = isHabitDone(habit.id, d);
                   const isPast  = isCurrentMonth ? d <= today : true;
