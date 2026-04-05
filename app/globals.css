@@ -2,131 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Design tokens ── */
 :root {
-  --primary:        #930500;
-  --primary-fixed:  #ff5252;
-  --secondary:      #95BBEA;
-  --tertiary:       #FFF8E7;
-  --background:     #121212;
-  --surface:        #1e1e1e;
-  --on-surface:     #e6e1e5;
+  --primary:        #007AFF;
+  --primary-fixed:  #007AFF;
+  --secondary:      #34C759;
+  --tertiary:       #FF9500;
+  --background:     #F2F2F7;
+  --surface:        #FFFFFF;
+  --on-surface:     #1C1C1E;
 }
 
-html { color-scheme: dark; }
+html { color-scheme: light; }
 
 body {
   background: var(--background);
   color:      var(--on-surface);
-  font-family: 'Public Sans', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
   min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ── Glass morphism ── */
+/* Cards */
 .glass-card {
-  background:         rgba(255, 255, 255, 0.04);
-  backdrop-filter:    blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border:             1px solid rgba(255, 255, 255, 0.10);
-  box-shadow:         0 8px 32px rgba(0, 0, 0, 0.5);
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
 }
 
 .glass-dark {
-  background:         rgba(0, 0, 0, 0.35);
-  backdrop-filter:    blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border:             1px solid rgba(255, 255, 255, 0.07);
+  background: #F2F2F7;
+  border: 1px solid #E5E5EA;
 }
 
 .glass-nav {
-  background:         rgba(18, 18, 18, 0.75);
-  backdrop-filter:    blur(32px);
-  -webkit-backdrop-filter: blur(32px);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-/* ── Ambient iridescent background ── */
-.iridescent-bg {
-  background: var(--background);
-  position:   relative;
-  overflow-x: hidden;
-}
-.iridescent-bg::before {
-  content:  '';
-  position: fixed;
-  inset:    0;
-  background:
-    radial-gradient(circle at 15% 25%, rgba(149, 187, 234, 0.07) 0%, transparent 45%),
-    radial-gradient(circle at 85% 75%, rgba(147,   5,   0, 0.09) 0%, transparent 45%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Interactive states ── */
+/* Interactive */
 .interactive-scale {
-  transition: transform 280ms cubic-bezier(0.33, 1, 0.68, 1);
+  transition: transform 200ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 .interactive-scale:hover  { transform: scale(1.02); }
 .interactive-scale:active { transform: scale(0.96); }
 
-/* ── Glimmer button ── */
+/* Glimmer button */
 .glimmer-btn { position: relative; overflow: hidden; }
 .glimmer-btn::after {
-  content:    '';
-  position:   absolute;
+  content: '';
+  position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.28), transparent);
-  transform:  rotate(45deg);
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: rotate(45deg);
   transition: 0.5s;
   pointer-events: none;
 }
 .glimmer-btn:hover::after { left: 100%; }
 
-/* ── Material Symbols ── */
+/* Material Symbols */
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
   user-select: none;
   vertical-align: middle;
 }
 
-/* ── Range slider ── */
+/* Range slider — Apple style */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  height: 6px;
+  height: 4px;
   border-radius: 9999px;
   outline: none;
-  background: rgba(255, 255, 255, 0.10);
+  background: #E5E5EA;
   cursor: pointer;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width:  20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background:   var(--primary-fixed);
-  border:       2px solid rgba(255, 255, 255, 0.25);
-  box-shadow:   0 0 10px rgba(255, 82, 82, 0.45);
+  background: #FFFFFF;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25), 0 0 0 0.5px rgba(0,0,0,0.12);
   cursor: pointer;
 }
 input[type="range"]::-moz-range-thumb {
-  width:  20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background:   var(--primary-fixed);
-  border:       2px solid rgba(255, 255, 255, 0.25);
-  box-shadow:   0 0 10px rgba(255, 82, 82, 0.45);
+  background: #FFFFFF;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
   cursor: pointer;
 }
 
-/* ── Scrollbar ── */
+/* Scrollbar */
 ::-webkit-scrollbar       { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 9999px; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 9999px; }
 
-/* ── Animations ── */
+/* Animations */
 @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
-.animate-fade-in  { animation: fadeIn  0.4s ease-out; }
-.animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.33, 1, 0.68, 1); }
+.animate-fade-in  { animation: fadeIn  0.3s ease-out; }
+.animate-slide-up { animation: slideUp 0.3s cubic-bezier(0.33, 1, 0.68, 1); }
+.animate-slide-in-left { animation: slideInLeft 0.3s cubic-bezier(0.33, 1, 0.68, 1); }

@@ -46,13 +46,13 @@ function minToSlot(min: number): string {
 const PRIORITY_COLORS: Record<TaskPriority, string> = {
   high:   "#ff5252",
   medium: "#fbbf24",
-  low:    "#95BBEA",
+  low:    "#007AFF",
 };
 
 const PRIORITY_STYLE: Record<TaskPriority, { bg: string; border: string; text: string; dot: string }> = {
-  high:   { bg: "bg-primary/[0.18]",   border: "border-primary-fixed/30", text: "text-primary-fixed", dot: "bg-primary-fixed" },
+  high:   { bg: "bg-primary/[0.18]",   border: "border-primary-fixed/30", text: "text-[#007AFF]", dot: "bg-primary-fixed" },
   medium: { bg: "bg-amber-500/[0.15]", border: "border-amber-400/30",     text: "text-amber-300",     dot: "bg-amber-400"     },
-  low:    { bg: "bg-secondary/[0.15]", border: "border-secondary/30",     text: "text-secondary",     dot: "bg-secondary"     },
+  low:    { bg: "bg-secondary/[0.15]", border: "border-[#34C759]/25",     text: "text-[#34C759]",     dot: "bg-secondary"     },
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -229,8 +229,8 @@ export default function DragCalendar({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-headline text-3xl italic text-white">Planner</h3>
-          <p className="font-label text-[9px] uppercase tracking-widest text-white/30">
+          <h3 className="text-[22px] font-bold text-[#1C1C1E]">Planner</h3>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">
             {now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
           </p>
         </div>
@@ -238,10 +238,10 @@ export default function DragCalendar({
         <button
           onClick={onGeneratePlan}
           disabled={planLoading || !dayContext}
-          className={`glimmer-btn flex items-center gap-1.5 px-4 py-2 rounded-full font-label text-[10px] uppercase tracking-widest font-bold transition-all ${
+          className={`glimmer-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest font-bold transition-all ${
             planLoading || !dayContext
-              ? "glass-dark border border-white/10 text-white/20 cursor-not-allowed"
-              : "bg-gradient-to-r from-primary to-primary-dim text-white shadow-[0_4px_16px_rgba(147,5,0,0.35)] interactive-scale"
+              ? "bg-[#F2F2F7] border border-[#E5E5EA] text-[#AEAEB2] cursor-not-allowed"
+              : "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] shadow-[0_4px_16px_rgba(0,122,255,0.25)] interactive-scale"
           }`}
         >
           <span className={`material-symbols-outlined text-sm ${planLoading ? "animate-spin" : ""}`} style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -253,26 +253,26 @@ export default function DragCalendar({
 
       {/* Streaming */}
       {planLoading && streamText && (
-        <div className="glass-dark rounded-lg p-3 border border-secondary/15">
-          <p className="font-label text-[8px] uppercase tracking-widest text-secondary/50 mb-1">✦ Claude is thinking…</p>
-          <p className="text-xs text-white/35 font-mono line-clamp-3">{streamText}</p>
+        <div className="bg-[#F2F2F7] rounded-xl p-3 border border-secondary/15">
+          <p className="text-[9px] font-semibold uppercase tracking-widest text-[#34C759] mb-1">✦ Claude is thinking…</p>
+          <p className="text-xs text-[#8E8E93] font-mono line-clamp-3">{streamText}</p>
         </div>
       )}
 
       {/* AI summary strip */}
       {dayPlan?.summary && !planLoading && (
-        <div className="glass-dark rounded-lg px-4 py-3 border border-white/[0.07]">
+        <div className="bg-[#F2F2F7] rounded-xl px-4 py-3 border border-[#E5E5EA]">
           <p className="font-editorial text-white/65 italic text-sm leading-relaxed">{dayPlan.summary}</p>
         </div>
       )}
 
       {tapSel && (
-        <div className="glass-dark border border-secondary/30 rounded-lg px-4 py-2.5 flex items-center gap-2">
-          <span className="material-symbols-outlined text-secondary text-sm">touch_app</span>
-          <p className="font-label text-[9px] uppercase tracking-widest text-secondary/70">
+        <div className="bg-[#F2F2F7] border border-[#34C759]/25 rounded-lg px-4 py-2.5 flex items-center gap-2">
+          <span className="material-symbols-outlined text-[#34C759] text-sm">touch_app</span>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#34C759]">
             Tap a time slot to place &ldquo;{reminders.find(r => r.id === tapSel)?.title}&rdquo;
           </p>
-          <button onClick={() => setTapSel(null)} className="ml-auto text-white/30">
+          <button onClick={() => setTapSel(null)} className="ml-auto text-[#8E8E93]">
             <span className="material-symbols-outlined text-sm">close</span>
           </button>
         </div>
@@ -282,7 +282,7 @@ export default function DragCalendar({
       <div className="flex gap-3 flex-col-reverse md:flex-row">
 
         {/* ── Time grid ── */}
-        <div className="flex-1 glass-card rounded-lg overflow-hidden flex flex-col">
+        <div className="flex-1 bg-white rounded-2xl border border-[#E5E5EA] shadow-sm overflow-hidden flex flex-col">
           <div
             ref={gridRef}
             className="overflow-y-auto"
@@ -301,7 +301,7 @@ export default function DragCalendar({
                   key={slot}
                   style={{ minHeight: SLOT_H }}
                   className={`flex border-b transition-colors ${
-                    isHour ? "border-white/[0.07]" : "border-white/[0.03]"
+                    isHour ? "border-[#E5E5EA]" : "border-[#F2F2F7]"
                   } ${isNow ? "bg-primary/[0.06]" : ""} ${isHover ? "bg-secondary/[0.08]" : ""}`}
                   onDragOver={(e) => handleDragOver(e, slot)}
                   onDragLeave={() => setHoverSlot(null)}
@@ -311,7 +311,7 @@ export default function DragCalendar({
                   {/* Time label */}
                   <div className="w-12 shrink-0 flex items-start justify-end pr-2 pt-1.5">
                     {isHour && (
-                      <p className="font-label text-[9px] text-white/20">{slot}</p>
+                      <p className="font-label text-[9px] text-[#AEAEB2]">{slot}</p>
                     )}
                     {isNow && (
                       <div className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse mt-1.5" />
@@ -323,13 +323,13 @@ export default function DragCalendar({
                     {/* AI plan blocks */}
                     {planEvs.map((b, i) => {
                       const blockColors: Record<string, string> = {
-                        task: "text-secondary border-secondary/20 bg-secondary/[0.06]",
-                        meal: "text-amber-400 border-amber-400/20 bg-amber-400/[0.06]",
-                        exercise: "text-green-400 border-green-400/20 bg-green-400/[0.06]",
-                        break: "text-tertiary border-tertiary/20 bg-tertiary/[0.06]",
-                        rest: "text-white/40 border-white/10 bg-white/[0.03]",
-                        focus: "text-secondary border-secondary/25 bg-secondary/[0.08]",
-                        habit: "text-tertiary border-tertiary/20 bg-tertiary/[0.06]",
+                        task: "text-[#34C759] border-[#34C759]/20 bg-secondary/[0.06]",
+                        meal: "text-[#FF9500] border-amber-400/20 bg-amber-400/[0.06]",
+                        exercise: "text-[#34C759] border-green-400/20 bg-green-400/[0.06]",
+                        break: "text-[#FF9500] border-[#FF9500]/15 bg-[#FF9500]/5",
+                        rest: "text-[#8E8E93] border-[#E5E5EA] bg-[#F8F8F8]",
+                        focus: "text-[#34C759] border-[#34C759]/20 bg-secondary/[0.08]",
+                        habit: "text-[#FF9500] border-[#FF9500]/15 bg-[#FF9500]/5",
                       };
                       return (
                         <div key={i} className={`flex items-center gap-1.5 px-2 py-1 rounded border text-xs ${blockColors[b.type] ?? blockColors.rest}`}>
@@ -357,10 +357,10 @@ export default function DragCalendar({
                         >
                           <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${s.dot}`} />
                           <p className={`text-xs flex-1 leading-snug truncate ${s.text}`}>{ev.title}</p>
-                          <p className="font-label text-[8px] text-white/20 shrink-0">→{endTime}</p>
+                          <p className="font-label text-[8px] text-[#AEAEB2] shrink-0">→{endTime}</p>
                           <button
                             onClick={(e) => { e.stopPropagation(); returnToSidebar(ev.id); }}
-                            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/25 hover:text-white/60 transition-all"
+                            className="shrink-0 opacity-0 group-hover:opacity-100 text-[#AEAEB2] hover:text-[#6C6C70] transition-all"
                             title="Move back to sidebar"
                           >
                             <span className="material-symbols-outlined text-xs">west</span>
@@ -377,16 +377,16 @@ export default function DragCalendar({
 
         {/* ── Reminders sidebar ── */}
         <div className="w-full md:w-60 shrink-0">
-          <div className="glass-card rounded-lg overflow-hidden sticky top-20">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.08]">
+          <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm overflow-hidden sticky top-20">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5EA]">
               <div>
-                <p className="font-label text-[10px] uppercase tracking-widest text-white/50">Reminders</p>
-                <p className="font-label text-[8px] text-white/20">{reminders.length} unscheduled</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6C6C70]">Reminders</p>
+                <p className="font-label text-[8px] text-[#AEAEB2]">{reminders.length} unscheduled</p>
               </div>
               <button
                 onClick={() => setShowForm(!showForm)}
                 className={`interactive-scale w-7 h-7 rounded-full flex items-center justify-center transition-all ${
-                  showForm ? "bg-white/10 text-white/60" : "bg-primary/20 text-primary-fixed border border-primary/30"
+                  showForm ? "bg-[#F2F2F7] text-[#6C6C70]" : "bg-[#007AFF]/10 text-[#007AFF] border border-[#007AFF]/20"
                 }`}
               >
                 <span className="material-symbols-outlined text-sm">{showForm ? "close" : "add"}</span>
@@ -395,17 +395,17 @@ export default function DragCalendar({
 
             {/* Add form */}
             {showForm && (
-              <div className="p-3 border-b border-white/[0.08] space-y-2.5 animate-slide-up">
+              <div className="p-3 border-b border-[#E5E5EA] space-y-2.5 animate-slide-up">
                 <input
                   autoFocus
                   type="text" value={fTitle} onChange={(e) => setFTitle(e.target.value)}
                   placeholder="Reminder title…"
                   onKeyDown={(e) => e.key === "Enter" && handleAddReminder()}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder-white/20 focus:outline-none focus:border-secondary/40"
+                  className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2 text-xs text-[#1C1C1E] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40"
                 />
                 {/* Priority */}
                 <div>
-                  <p className="font-label text-[8px] uppercase tracking-widest text-white/25 mb-1.5">Priority</p>
+                  <p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mb-1.5">Priority</p>
                   <div className="grid grid-cols-3 gap-1">
                     {(["high", "medium", "low"] as TaskPriority[]).map((p) => {
                       const s = PRIORITY_STYLE[p];
@@ -414,7 +414,7 @@ export default function DragCalendar({
                           key={p}
                           onClick={() => setFPriority(p)}
                           className={`py-1.5 rounded border text-center font-label text-[8px] uppercase tracking-wider transition-all interactive-scale ${
-                            fPriority === p ? `${s.bg} ${s.border} ${s.text}` : "glass-dark border-white/10 text-white/30"
+                            fPriority === p ? `${s.bg} ${s.border} ${s.text}` : "bg-[#F2F2F7] border-[#E5E5EA] text-[#8E8E93]"
                           }`}
                         >
                           <div className={`w-1.5 h-1.5 rounded-full mx-auto mb-0.5 ${s.dot}`} />
@@ -428,7 +428,7 @@ export default function DragCalendar({
                 <select
                   value={fMins}
                   onChange={(e) => setFMins(Number(e.target.value))}
-                  className="w-full bg-white/5 border border-white/10 rounded px-2 py-1.5 text-xs text-white/60 focus:outline-none"
+                  className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded px-2 py-1.5 text-xs text-[#6C6C70] focus:outline-none"
                 >
                   {[15, 30, 45, 60, 90, 120].map((m) => (
                     <option key={m} value={m}>{m < 60 ? `${m} min` : `${m / 60}h`}</option>
@@ -438,15 +438,15 @@ export default function DragCalendar({
                   value={fNotes} onChange={(e) => setFNotes(e.target.value)}
                   placeholder="Notes (optional)"
                   rows={2}
-                  className="w-full bg-white/5 border border-white/10 rounded px-2 py-1.5 text-xs text-white/50 placeholder-white/15 resize-none focus:outline-none"
+                  className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded px-2 py-1.5 text-xs text-[#6C6C70] placeholder-white/15 resize-none focus:outline-none"
                 />
                 <button
                   onClick={handleAddReminder}
                   disabled={!fTitle.trim()}
-                  className={`w-full py-2 rounded font-label text-[9px] uppercase tracking-widest font-bold transition-all ${
+                  className={`w-full py-2 rounded text-[10px] font-semibold uppercase tracking-widest font-bold transition-all ${
                     fTitle.trim()
-                      ? "bg-gradient-to-r from-primary to-primary-dim text-white interactive-scale"
-                      : "bg-white/5 text-white/20 cursor-not-allowed"
+                      ? "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] interactive-scale"
+                      : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
                   }`}
                 >
                   Add Reminder
@@ -457,10 +457,10 @@ export default function DragCalendar({
             {/* Drag hint */}
             {!showForm && reminders.length === 0 && (
               <div className="py-8 px-4 text-center space-y-2">
-                <span className="material-symbols-outlined text-3xl text-white/10 block" style={{ fontVariationSettings: "'FILL' 1" }}>
+                <span className="material-symbols-outlined text-3xl text-[#C6C6C8] block" style={{ fontVariationSettings: "'FILL' 1" }}>
                   drag_indicator
                 </span>
-                <p className="font-label text-[9px] uppercase tracking-widest text-white/20 leading-relaxed">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2] leading-relaxed">
                   Add reminders then drag them onto the time grid
                 </p>
               </div>
@@ -484,18 +484,18 @@ export default function DragCalendar({
                   >
                     <div className="flex flex-col gap-1 pt-0.5 shrink-0">
                       <div className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
-                      <span className="material-symbols-outlined text-[11px] text-white/20">drag_indicator</span>
+                      <span className="material-symbols-outlined text-[11px] text-[#AEAEB2]">drag_indicator</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className={`text-xs font-medium leading-snug ${s.text}`}>{r.title}</p>
-                      {r.notes && <p className="text-[10px] text-white/30 mt-0.5 line-clamp-1">{r.notes}</p>}
-                      <p className="font-label text-[8px] text-white/20 mt-0.5 uppercase tracking-wider">
+                      {r.notes && <p className="text-[10px] text-[#8E8E93] mt-0.5 line-clamp-1">{r.notes}</p>}
+                      <p className="font-label text-[8px] text-[#AEAEB2] mt-0.5 uppercase tracking-wider">
                         {r.estimatedMinutes < 60 ? `${r.estimatedMinutes}m` : `${r.estimatedMinutes / 60}h`} · {r.priority}
                       </p>
                     </div>
                     <button
                       onClick={(e) => { e.stopPropagation(); deleteReminder(r.id); }}
-                      className="shrink-0 opacity-0 group-hover:opacity-100 text-white/20 hover:text-red-400/60 transition-all"
+                      className="shrink-0 opacity-0 group-hover:opacity-100 text-[#AEAEB2] hover:text-[#FF3B30]/60 transition-all"
                     >
                       <span className="material-symbols-outlined text-xs">close</span>
                     </button>
@@ -506,7 +506,7 @@ export default function DragCalendar({
 
             {/* Tips */}
             {reminders.length > 0 && (
-              <div className="px-4 py-2.5 border-t border-white/[0.05]">
+              <div className="px-4 py-2.5 border-t border-[#F2F2F7]">
                 <p className="font-label text-[8px] text-white/15 leading-relaxed">
                   Drag to grid · Tap slot on mobile · ← to unschedule
                 </p>

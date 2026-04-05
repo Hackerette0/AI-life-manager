@@ -93,16 +93,16 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
   }));
 
   return (
-    <div className="glass-card rounded-lg overflow-hidden">
+    <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between p-5 border-b border-white/[0.08]">
+      <div className="flex items-center justify-between p-5 border-b border-[#E5E5EA]">
         <div className="flex items-center gap-3">
-          <span className="material-symbols-outlined text-primary-fixed/70 text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+          <span className="material-symbols-outlined text-[#007AFF] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
             calendar_today
           </span>
           <div>
-            <h3 className="font-headline text-2xl italic text-white">Today&apos;s Calendar</h3>
-            <p className="font-label text-[9px] uppercase tracking-widest text-white/30">
+            <h3 className="text-[18px] font-bold text-[#1C1C1E]">Today&apos;s Calendar</h3>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">
               {now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
             </p>
           </div>
@@ -110,17 +110,17 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => { setShowGcalInfo(!showGcalInfo); setShowForm(false); }}
-            className="interactive-scale p-2 rounded-full glass-dark border border-white/15 text-white/40 hover:text-white/60 transition-all"
+            className="interactive-scale p-2 rounded-full glass-dark border border-[#E5E5EA] text-[#8E8E93] hover:text-[#6C6C70] transition-all"
             title="Connect Google Calendar"
           >
             <span className="material-symbols-outlined text-sm">sync</span>
           </button>
           <button
             onClick={() => { setShowForm(!showForm); setShowGcalInfo(false); }}
-            className={`interactive-scale flex items-center gap-1.5 px-4 py-2 rounded-full font-label text-[10px] uppercase tracking-widest font-bold transition-all ${
+            className={`interactive-scale flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest font-bold transition-all ${
               showForm
-                ? "glass-dark border border-white/20 text-white/60"
-                : "bg-primary/20 border border-primary/40 text-primary-fixed hover:bg-primary/30"
+                ? "glass-dark border border-[#E5E5EA] text-[#6C6C70]"
+                : "bg-[#007AFF]/10 border border-[#007AFF]/30 text-[#007AFF] hover:bg-primary/30"
             }`}
           >
             <span className="material-symbols-outlined text-sm">{showForm ? "close" : "add"}</span>
@@ -131,22 +131,22 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
 
       {/* Google Calendar connect info */}
       {showGcalInfo && (
-        <div className="mx-5 my-3 glass-dark rounded-lg border border-secondary/20 p-4 animate-slide-up">
+        <div className="mx-5 my-3 bg-[#F2F2F7] rounded-xl border border-[#34C759]/20 p-4 animate-slide-up">
           <div className="flex items-start gap-3">
-            <span className="material-symbols-outlined text-secondary/70 text-xl shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>
+            <span className="material-symbols-outlined text-[#34C759] text-xl shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>
               info
             </span>
             <div className="space-y-2">
-              <p className="font-label text-[9px] uppercase tracking-widest text-secondary/60">Google Calendar Integration</p>
-              <p className="text-xs text-white/50 leading-relaxed">
-                To sync Google Calendar events, add your Google Calendar API credentials to <code className="text-secondary/70 bg-white/5 px-1 rounded">.env.local</code>:
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#34C759]">Google Calendar Integration</p>
+              <p className="text-xs text-[#6C6C70] leading-relaxed">
+                To sync Google Calendar events, add your Google Calendar API credentials to <code className="text-[#34C759] bg-[#F8F8F8] px-1 rounded">.env.local</code>:
               </p>
-              <div className="bg-white/[0.04] rounded p-2.5 font-mono text-[10px] text-white/40 space-y-0.5">
+              <div className="bg-[#F2F2F7] rounded p-2.5 font-mono text-[10px] text-[#8E8E93] space-y-0.5">
                 <p>GOOGLE_CLIENT_ID=your_client_id</p>
                 <p>GOOGLE_CLIENT_SECRET=your_client_secret</p>
               </div>
-              <p className="text-xs text-white/30 leading-relaxed">
-                Then visit <span className="text-secondary/60">console.cloud.google.com</span>, enable the Calendar API, and create OAuth 2.0 credentials. Until then, add events manually below.
+              <p className="text-xs text-[#8E8E93] leading-relaxed">
+                Then visit <span className="text-[#34C759]">console.cloud.google.com</span>, enable the Calendar API, and create OAuth 2.0 credentials. Until then, add events manually below.
               </p>
             </div>
           </div>
@@ -155,38 +155,38 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
 
       {/* Add event form */}
       {showForm && (
-        <div className="mx-5 my-3 glass-dark rounded-lg border border-white/10 p-4 space-y-3 animate-slide-up">
+        <div className="mx-5 my-3 bg-[#F2F2F7] rounded-xl border border-[#E5E5EA] p-4 space-y-3 animate-slide-up">
           <input
             type="text" value={title} onChange={(e) => setTitle(e.target.value)}
             placeholder="Event title…"
             autoFocus
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-secondary/40 transition-all"
+            className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-4 py-2.5 text-sm text-[#1C1C1E] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 transition-all"
           />
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <p className="font-label text-[9px] uppercase tracking-widest text-white/30 mb-1.5">Start time</p>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-1.5">Start time</p>
               <input
                 type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white/70 focus:outline-none focus:border-secondary/40 [color-scheme:dark]"
+                className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2 text-sm text-[#3C3C43] focus:outline-none focus:border-[#007AFF]/40 "
               />
             </div>
             <div>
-              <p className="font-label text-[9px] uppercase tracking-widest text-white/30 mb-1.5">End time</p>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-1.5">End time</p>
               <input
                 type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white/70 focus:outline-none focus:border-secondary/40 [color-scheme:dark]"
+                className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2 text-sm text-[#3C3C43] focus:outline-none focus:border-[#007AFF]/40 "
               />
             </div>
           </div>
           <input
             type="text" value={location} onChange={(e) => setLocation(e.target.value)}
             placeholder="Location (optional)"
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white/70 placeholder-white/20 focus:outline-none focus:border-secondary/40 transition-all"
+            className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-4 py-2.5 text-sm text-[#3C3C43] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 transition-all"
           />
           {/* Color picker */}
           <div>
-            <p className="font-label text-[9px] uppercase tracking-widest text-white/30 mb-2">Color</p>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-2">Color</p>
             <div className="flex gap-2">
               {EVENT_COLORS.map((c) => (
                 <button
@@ -203,8 +203,8 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
             disabled={!title.trim()}
             className={`glimmer-btn w-full py-2.5 rounded-lg font-label text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${
               title.trim()
-                ? "bg-gradient-to-r from-primary to-primary-dim text-white shadow-[0_4px_16px_rgba(147,5,0,0.35)] interactive-scale"
-                : "bg-white/5 text-white/20 cursor-not-allowed"
+                ? "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] shadow-[0_4px_16px_rgba(0,122,255,0.25)] interactive-scale"
+                : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
             }`}
           >
             Add Event
@@ -218,7 +218,7 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
           {allDayEvents.map((e) => (
             <span
               key={e.id}
-              className="font-label text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full border text-white/70"
+              className="text-[10px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full border text-[#3C3C43]"
               style={{ borderColor: (e.color ?? "#95BBEA") + "40", backgroundColor: (e.color ?? "#95BBEA") + "15" }}
             >
               {e.title}
@@ -231,11 +231,11 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
       <div className="p-5">
         {todayEvents.length === 0 && planBlocks.length === 0 ? (
           <div className="py-8 text-center">
-            <span className="material-symbols-outlined text-4xl text-white/10 block mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>
+            <span className="material-symbols-outlined text-4xl text-[#C6C6C8] block mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>
               event_available
             </span>
-            <p className="font-label text-[10px] uppercase tracking-widest text-white/20">No events yet — add one above</p>
-            <p className="text-xs text-white/20 mt-1">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2]">No events yet — add one above</p>
+            <p className="text-xs text-[#AEAEB2] mt-1">
               Or generate your AI schedule in the Flow tab to see time blocks here
             </p>
           </div>
@@ -244,7 +244,7 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
             {/* Current time indicator */}
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse shrink-0" />
-              <p className="font-label text-[9px] uppercase tracking-widest text-primary-fixed/70">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#007AFF]">
                 Now · {now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               </p>
             </div>
@@ -285,40 +285,40 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
                     }}
                   >
                     <div className="text-center w-12 shrink-0">
-                      <p className="font-label text-[10px] font-bold text-white/50">
+                      <p className="font-label text-[10px] font-bold text-[#6C6C70]">
                         {pad(startH)}:{pad(startM)}
                       </p>
-                      <p className="font-label text-[8px] text-white/20">
+                      <p className="font-label text-[8px] text-[#AEAEB2]">
                         {duration}m
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
-                        <p className={`text-sm font-medium leading-snug flex-1 ${isPast ? "line-through text-white/30" : "text-white/85"}`}>
+                        <p className={`text-sm font-medium leading-snug flex-1 ${isPast ? "line-through text-[#8E8E93]" : "text-white/85"}`}>
                           {item.title}
                         </p>
                         {isNow && (
-                          <span className="font-label text-[8px] uppercase tracking-widest bg-primary text-white px-2 py-0.5 rounded-full animate-pulse shrink-0">
+                          <span className="text-[9px] font-semibold uppercase tracking-widest bg-primary text-[#1C1C1E] px-2 py-0.5 rounded-full animate-pulse shrink-0">
                             now
                           </span>
                         )}
                         {!item.isPlan && (
                           <button
                             onClick={() => deleteEvent(item.originalId)}
-                            className="shrink-0 text-white/10 hover:text-red-400/70 transition-colors interactive-scale opacity-0 group-hover:opacity-100"
+                            className="shrink-0 text-[#C6C6C8] hover:text-[#FF3B30]/70 transition-colors interactive-scale opacity-0 group-hover:opacity-100"
                           >
                             <span className="material-symbols-outlined text-sm">close</span>
                           </button>
                         )}
                       </div>
                       {item.location && (
-                        <p className="text-xs text-white/30 mt-0.5 flex items-center gap-1">
+                        <p className="text-xs text-[#8E8E93] mt-0.5 flex items-center gap-1">
                           <span className="material-symbols-outlined text-xs">location_on</span>
                           {item.location}
                         </p>
                       )}
-                      <p className="font-label text-[8px] text-white/20 mt-0.5 uppercase tracking-wider">
+                      <p className="font-label text-[8px] text-[#AEAEB2] mt-0.5 uppercase tracking-wider">
                         {pad(startH)}:{pad(startM)} – {pad(endH)}:{pad(endM)}
                         {item.source === "google" && " · Google Calendar"}
                       </p>
@@ -330,7 +330,7 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
             {/* Plan blocks in a separate section */}
             {dayPlan && dayPlan.schedule.length > 0 && (
               <div className="mt-4 pt-4 border-t border-white/[0.06]">
-                <p className="font-label text-[9px] uppercase tracking-widest text-white/20 mb-2">AI Schedule</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2] mb-2">AI Schedule</p>
                 <div className="space-y-1.5">
                   {dayPlan.schedule.map((b, i) => {
                     const startMin = timeToMin(b.time);
@@ -349,11 +349,11 @@ export default function CalendarView({ events, dayPlan, onUpdate }: Props) {
                         }`}
                         style={{ borderColor: c + "20", backgroundColor: c + "08" }}
                       >
-                        <p className="font-label text-[10px] font-bold text-white/30 w-10 shrink-0">{b.time}</p>
-                        <p className={`text-xs leading-snug ${isPast ? "line-through text-white/20" : "text-white/55"}`}>
+                        <p className="font-label text-[10px] font-bold text-[#8E8E93] w-10 shrink-0">{b.time}</p>
+                        <p className={`text-xs leading-snug ${isPast ? "line-through text-[#AEAEB2]" : "text-[#6C6C70]"}`}>
                           {b.title}
                         </p>
-                        <p className="font-label text-[8px] text-white/20 ml-auto shrink-0">{b.duration}m</p>
+                        <p className="font-label text-[8px] text-[#AEAEB2] ml-auto shrink-0">{b.duration}m</p>
                       </div>
                     );
                   })}

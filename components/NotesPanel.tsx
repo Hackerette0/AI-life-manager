@@ -10,18 +10,18 @@ interface Props {
 }
 
 const NOTE_COLORS = [
-  { label: "Default", value: "default",  bg: "bg-white/[0.04]",     border: "border-white/10"      },
+  { label: "Default", value: "default",  bg: "bg-[#F2F2F7]",     border: "border-[#E5E5EA]"      },
   { label: "Red",     value: "red",      bg: "bg-primary/[0.12]",   border: "border-primary/25"    },
-  { label: "Blue",    value: "blue",     bg: "bg-secondary/[0.10]", border: "border-secondary/25"  },
+  { label: "Blue",    value: "blue",     bg: "bg-[#34C759]/10", border: "border-[#34C759]/20"  },
   { label: "Amber",   value: "amber",    bg: "bg-amber-500/[0.10]", border: "border-amber-500/25"  },
   { label: "Green",   value: "green",    bg: "bg-green-500/[0.10]", border: "border-green-500/25"  },
-  { label: "Cream",   value: "cream",    bg: "bg-tertiary/[0.08]",  border: "border-tertiary/20"   },
+  { label: "Cream",   value: "cream",    bg: "bg-[#FF9500]/5",  border: "border-[#FF9500]/15"   },
 ];
 
 const PRIORITY_STYLE: Record<TaskPriority, { dot: string; label: string; text: string }> = {
-  high:   { dot: "bg-primary-fixed", label: "High",   text: "text-primary-fixed" },
-  medium: { dot: "bg-amber-400",     label: "Medium", text: "text-amber-400"     },
-  low:    { dot: "bg-secondary",     label: "Low",    text: "text-secondary"     },
+  high:   { dot: "bg-primary-fixed", label: "High",   text: "text-[#007AFF]" },
+  medium: { dot: "bg-amber-400",     label: "Medium", text: "text-[#FF9500]"     },
+  low:    { dot: "bg-secondary",     label: "Low",    text: "text-[#34C759]"     },
 };
 
 function colorStyle(color: string) {
@@ -103,17 +103,17 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-headline text-3xl italic text-white">Notes</h3>
-          <p className="font-label text-[9px] uppercase tracking-widest text-white/30">
+          <h3 className="text-[22px] font-bold text-[#1C1C1E]">Notes</h3>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">
             {notes.length} note{notes.length !== 1 ? "s" : ""}
           </p>
         </div>
         <button
           onClick={() => { setShowNew(!showNew); setEditId(null); }}
-          className={`interactive-scale flex items-center gap-1.5 px-4 py-2 rounded-full font-label text-[10px] uppercase tracking-widest font-bold transition-all ${
+          className={`interactive-scale flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest font-bold transition-all ${
             showNew
-              ? "glass-dark border border-white/20 text-white/50"
-              : "bg-primary/20 border border-primary/40 text-primary-fixed hover:bg-primary/30"
+              ? "bg-[#F2F2F7] border border-[#E5E5EA] text-[#6C6C70]"
+              : "bg-[#007AFF]/10 border border-[#007AFF]/30 text-[#007AFF] hover:bg-primary/30"
           }`}
         >
           <span className="material-symbols-outlined text-sm">{showNew ? "close" : "edit_note"}</span>
@@ -123,23 +123,23 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
 
       {/* New note form */}
       {showNew && (
-        <div className="glass-card rounded-lg p-4 space-y-3 animate-slide-up border border-white/10">
+        <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm p-4 space-y-3 animate-slide-up border border-[#E5E5EA]">
           <input
             autoFocus
             type="text" value={nTitle} onChange={(e) => setNTitle(e.target.value)}
             placeholder="Title…"
-            className="w-full bg-transparent border-b border-white/10 pb-2 text-lg font-headline italic text-white placeholder-white/20 focus:outline-none focus:border-white/25"
+            className="w-full bg-transparent border-b border-[#E5E5EA] pb-2 text-lg font-headline italic text-[#1C1C1E] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40"
           />
           <textarea
             value={nContent} onChange={(e) => setNContent(e.target.value)}
             placeholder="Write your note…"
             rows={5}
-            className="w-full bg-transparent text-sm text-white/70 placeholder-white/20 resize-none focus:outline-none leading-relaxed"
+            className="w-full bg-transparent text-sm text-[#3C3C43] placeholder-[#C6C6C8] resize-none focus:outline-none leading-relaxed"
           />
           <input
             type="text" value={nTags} onChange={(e) => setNTags(e.target.value)}
             placeholder="Tags: work, ideas, personal…"
-            className="w-full bg-white/[0.03] border border-white/[0.07] rounded px-3 py-2 text-xs text-white/50 placeholder-white/20 focus:outline-none"
+            className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded px-3 py-2 text-xs text-[#6C6C70] placeholder-[#C6C6C8] focus:outline-none"
           />
 
           <div className="flex items-center justify-between flex-wrap gap-3">
@@ -151,10 +151,10 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
                   <button
                     key={p}
                     onClick={() => setNPriority(p)}
-                    className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded border font-label text-[9px] uppercase tracking-widest transition-all interactive-scale ${
+                    className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded border text-[10px] font-semibold uppercase tracking-widest transition-all interactive-scale ${
                       nPriority === p
-                        ? `bg-white/10 border-white/25 ${s.text}`
-                        : "glass-dark border-white/10 text-white/30"
+                        ? `bg-[#F2F2F7] border-[#007AFF]/25 ${s.text}`
+                        : "bg-[#F2F2F7] border-[#E5E5EA] text-[#8E8E93]"
                     }`}
                   >
                     <div className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
@@ -181,8 +181,8 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
             disabled={!nTitle.trim() && !nContent.trim()}
             className={`w-full py-2.5 rounded-lg font-label text-[10px] uppercase tracking-[0.2em] font-bold transition-all glimmer-btn ${
               nTitle.trim() || nContent.trim()
-                ? "bg-gradient-to-r from-primary to-primary-dim text-white shadow-[0_4px_16px_rgba(147,5,0,0.35)] interactive-scale"
-                : "bg-white/5 text-white/20 cursor-not-allowed"
+                ? "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] shadow-[0_4px_16px_rgba(0,122,255,0.25)] interactive-scale"
+                : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
             }`}
           >
             Save Note
@@ -194,17 +194,17 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
       {notes.length > 0 && (
         <div className="flex gap-2">
           <div className="flex-1 relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/20">search</span>
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#AEAEB2]">search</span>
             <input
               type="text" value={search} onChange={(e) => setSearch(e.target.value)}
               placeholder="Search notes…"
-              className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg pl-9 pr-4 py-2 text-sm text-white/70 placeholder-white/20 focus:outline-none focus:border-white/20"
+              className="w-full bg-[#F2F2F7] border border-[#E5E5EA] rounded-lg pl-9 pr-4 py-2 text-sm text-[#3C3C43] placeholder-[#C6C6C8] focus:outline-none focus:border-[#E5E5EA]"
             />
           </div>
           <select
             value={filterPri}
             onChange={(e) => setFilterPri(e.target.value as TaskPriority | "all")}
-            className="bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-xs text-white/50 focus:outline-none"
+            className="bg-[#F2F2F7] border border-[#E5E5EA] rounded-lg px-3 py-2 text-xs text-[#6C6C70] focus:outline-none"
           >
             <option value="all">All</option>
             <option value="high">⚡ High</option>
@@ -217,10 +217,10 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
       {/* Notes grid */}
       {filtered.length === 0 && !showNew && (
         <div className="py-12 text-center">
-          <span className="material-symbols-outlined text-5xl text-white/10 block mb-3" style={{ fontVariationSettings: "'FILL' 1" }}>
+          <span className="material-symbols-outlined text-5xl text-[#C6C6C8] block mb-3" style={{ fontVariationSettings: "'FILL' 1" }}>
             edit_note
           </span>
-          <p className="font-label text-[10px] uppercase tracking-widest text-white/20">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2]">
             {notes.length > 0 ? "No notes match your search" : "Your notes will appear here"}
           </p>
         </div>
@@ -245,17 +245,17 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
                   <input
                     autoFocus
                     value={eTitle} onChange={(e) => setETitle(e.target.value)}
-                    className="w-full bg-transparent border-b border-white/10 pb-2 text-lg font-headline italic text-white placeholder-white/20 focus:outline-none"
+                    className="w-full bg-transparent border-b border-[#E5E5EA] pb-2 text-lg font-headline italic text-[#1C1C1E] placeholder-[#C6C6C8] focus:outline-none"
                   />
                   <textarea
                     value={eContent} onChange={(e) => setEContent(e.target.value)}
                     rows={6}
-                    className="w-full bg-transparent text-sm text-white/70 resize-none focus:outline-none leading-relaxed"
+                    className="w-full bg-transparent text-sm text-[#3C3C43] resize-none focus:outline-none leading-relaxed"
                   />
                   <input
                     value={eTags} onChange={(e) => setETags(e.target.value)}
                     placeholder="Tags…"
-                    className="w-full bg-white/[0.03] border border-white/[0.07] rounded px-3 py-1.5 text-xs text-white/50 focus:outline-none"
+                    className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded px-3 py-1.5 text-xs text-[#6C6C70] focus:outline-none"
                   />
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex gap-1.5">
@@ -264,7 +264,7 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
                         return (
                           <button key={p} onClick={() => setEPriority(p)}
                             className={`flex items-center gap-1 px-2 py-1 rounded border font-label text-[8px] uppercase tracking-wider transition-all ${
-                              ePriority === p ? `bg-white/10 border-white/25 ${s.text}` : "glass-dark border-white/10 text-white/25"
+                              ePriority === p ? `bg-[#F2F2F7] border-[#007AFF]/25 ${s.text}` : "bg-[#F2F2F7] border-[#E5E5EA] text-[#AEAEB2]"
                             }`}
                           >
                             <div className={`w-1 h-1 rounded-full ${s.dot}`} />{p}
@@ -281,8 +281,8 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={saveEdit} className="flex-1 py-2 rounded bg-gradient-to-r from-primary to-primary-dim text-white font-label text-[9px] uppercase tracking-widest">Save</button>
-                    <button onClick={() => setEditId(null)} className="px-4 py-2 rounded glass-dark border border-white/10 text-white/40 font-label text-[9px] uppercase tracking-widest">Cancel</button>
+                    <button onClick={saveEdit} className="flex-1 py-2 rounded bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] text-[10px] font-semibold uppercase tracking-widest">Save</button>
+                    <button onClick={() => setEditId(null)} className="px-4 py-2 rounded bg-[#F2F2F7] border border-[#E5E5EA] text-[#8E8E93] text-[10px] font-semibold uppercase tracking-widest">Cancel</button>
                   </div>
                 </div>
               ) : (
@@ -292,33 +292,33 @@ export default function NotesPanel({ notes, onUpdate }: Props) {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
                         {note.isPinned && (
-                          <span className="material-symbols-outlined text-xs text-tertiary/70" style={{ fontVariationSettings: "'FILL' 1" }}>push_pin</span>
+                          <span className="material-symbols-outlined text-xs text-[#FF9500]" style={{ fontVariationSettings: "'FILL' 1" }}>push_pin</span>
                         )}
                         <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${ps.dot}`} />
                         <h4 className="text-sm font-semibold text-white/90 leading-snug truncate">{note.title}</h4>
                       </div>
                     </div>
                     <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-all shrink-0">
-                      <button onClick={() => togglePin(note.id)} title="Pin" className="text-white/20 hover:text-tertiary/70 transition-colors">
+                      <button onClick={() => togglePin(note.id)} title="Pin" className="text-[#AEAEB2] hover:text-[#FF9500] transition-colors">
                         <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: note.isPinned ? "'FILL' 1" : "'FILL' 0" }}>push_pin</span>
                       </button>
-                      <button onClick={() => openEdit(note)} title="Edit" className="text-white/20 hover:text-white/60 transition-colors">
+                      <button onClick={() => openEdit(note)} title="Edit" className="text-[#AEAEB2] hover:text-[#6C6C70] transition-colors">
                         <span className="material-symbols-outlined text-sm">edit</span>
                       </button>
-                      <button onClick={() => deleteNote(note.id)} title="Delete" className="text-white/20 hover:text-red-400/70 transition-colors">
+                      <button onClick={() => deleteNote(note.id)} title="Delete" className="text-[#AEAEB2] hover:text-[#FF3B30]/70 transition-colors">
                         <span className="material-symbols-outlined text-sm">close</span>
                       </button>
                     </div>
                   </div>
 
                   {note.content && (
-                    <p className="text-xs text-white/50 leading-relaxed line-clamp-4 whitespace-pre-wrap">{note.content}</p>
+                    <p className="text-xs text-[#6C6C70] leading-relaxed line-clamp-4 whitespace-pre-wrap">{note.content}</p>
                   )}
 
                   <div className="flex items-center justify-between pt-1">
                     <div className="flex flex-wrap gap-1">
                       {note.tags.map((tag) => (
-                        <span key={tag} className="font-label text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded glass-dark border border-white/[0.07] text-white/30">
+                        <span key={tag} className="font-label text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#F2F2F7] border border-[#E5E5EA] text-[#8E8E93]">
                           {tag}
                         </span>
                       ))}
