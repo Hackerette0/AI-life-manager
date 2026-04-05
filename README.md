@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" alt="Le plan" width="320" />
+  <video src="https://raw.githubusercontent.com/Hackerette0/AI-life-manager/main/public/Le%20plan.mp4" autoplay loop muted playsinline width="600"></video>
 </p>
 
 > AI-powered life management — plan your day around how you actually feel.
