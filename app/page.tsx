@@ -100,8 +100,8 @@ export default function Home() {
   };
 
   if (!state) return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F2F2F7]">
-      <span className="material-symbols-outlined text-[#007AFF] text-5xl animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
+    <div className="min-h-screen flex items-center justify-center bg-[#0C0C0C]">
+      <span className="material-symbols-outlined text-[#FFD60A] text-5xl animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
     </div>
   );
 
@@ -131,16 +131,16 @@ export default function Home() {
       {/* Side overlay */}
       {sideOpen && (
         <div
-          className="fixed inset-0 bg-black/20 z-40 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
           onClick={() => setSideOpen(false)}
         />
       )}
 
       {/* Side panel */}
-      <div className={`fixed top-0 left-0 h-full w-64 bg-white z-50 shadow-2xl transition-transform duration-300 ease-out ${sideOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <div className={`fixed top-0 left-0 h-full w-64 bg-[#1A1A1A] z-50 shadow-2xl transition-transform duration-300 ease-out ${sideOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="pt-16 px-3 pb-8 flex flex-col h-full">
           <div className="px-3 mb-3">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#AEAEB2]">Navigation</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#AA7790]">Navigation</p>
           </div>
           <nav className="flex flex-col gap-0.5 flex-1">
             {tabs.map((tab) => (
@@ -149,37 +149,37 @@ export default function Home() {
                 onClick={() => { setActiveTab(tab.id); setSideOpen(false); }}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${
                   activeTab === tab.id
-                    ? "bg-[#007AFF]/10 text-[#007AFF]"
-                    : "text-[#3C3C43] hover:bg-[#F2F2F7]"
+                    ? "bg-[#FFD60A]/10 text-[#FFD60A]"
+                    : "text-[#FF9FCA] hover:bg-[#0C0C0C]"
                 }`}
               >
                 <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: activeTab === tab.id ? "'FILL' 1, 'wght' 500" : "'FILL' 0, 'wght' 300" }}>
                   {tab.icon}
                 </span>
                 <span className="text-[15px] font-medium">{tab.label}</span>
-                {activeTab === tab.id && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#007AFF]" />}
+                {activeTab === tab.id && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#FFD60A]" />}
               </button>
             ))}
           </nav>
-          <div className="border-t border-[#E5E5EA] pt-4 px-3">
+          <div className="border-t border-[#2A2A2A] pt-4 px-3">
             <p className="text-[9px] uppercase tracking-widest text-[#C6C6C8] font-medium">le plan · 2026</p>
           </div>
         </div>
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 w-full z-30 glass-nav border-b border-[#E5E5EA] flex justify-between items-center px-4 py-3">
+      <header className="fixed top-0 w-full z-30 glass-nav border-b border-[#2A2A2A] flex justify-between items-center px-4 py-3">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSideOpen(!sideOpen)}
-            className="p-2 rounded-xl hover:bg-[#F2F2F7] transition-all interactive-scale"
+            className="p-2 rounded-xl hover:bg-[#0C0C0C] transition-all interactive-scale"
           >
-            <span className="material-symbols-outlined text-[#3C3C43] text-[20px]" style={{ fontVariationSettings: "'wght' 300" }}>menu</span>
+            <span className="material-symbols-outlined text-[#FF9FCA] text-[20px]" style={{ fontVariationSettings: "'wght' 300" }}>menu</span>
           </button>
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-full bg-[#007AFF] flex items-center justify-center text-white font-bold text-xs shrink-0">✦</div>
+            <div className="w-7 h-7 rounded-full bg-[#FFD60A] flex items-center justify-center text-white font-bold text-xs shrink-0">✦</div>
             <div>
-              <h1 className="text-[16px] font-bold text-[#007AFF] leading-none" style={{ fontStyle: "italic", letterSpacing: "-0.02em" }}>
+              <h1 className="text-[16px] font-bold text-[#FFD60A] leading-none" style={{ fontStyle: "italic", letterSpacing: "-0.02em" }}>
                 le plan
               </h1>
               <TypewriterSubtitle />
@@ -188,45 +188,40 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-2">
           {focusMins > 0 && (
-            <div className="flex items-center gap-1.5 bg-[#E3F0FF] border border-[#007AFF]/15 px-2.5 py-1 rounded-full">
-              <span className="material-symbols-outlined text-[#007AFF] text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>center_focus_strong</span>
-              <span className="text-[10px] font-semibold text-[#007AFF]">{focusMins}m</span>
+            <div className="flex items-center gap-1.5 bg-[#E3F0FF] border border-[#FFD60A]/15 px-2.5 py-1 rounded-full">
+              <span className="material-symbols-outlined text-[#FFD60A] text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>center_focus_strong</span>
+              <span className="text-[10px] font-semibold text-[#FFD60A]">{focusMins}m</span>
             </div>
           )}
           {state.notes.length > 0 && (
-            <button onClick={() => setActiveTab("notes")} className="flex items-center gap-1.5 bg-[#F2F2F7] border border-[#E5E5EA] px-2.5 py-1 rounded-full interactive-scale">
-              <span className="material-symbols-outlined text-[#8E8E93] text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>edit_note</span>
-              <span className="text-[10px] font-medium text-[#8E8E93]">{state.notes.length}</span>
+            <button onClick={() => setActiveTab("notes")} className="flex items-center gap-1.5 bg-[#0C0C0C] border border-[#2A2A2A] px-2.5 py-1 rounded-full interactive-scale">
+              <span className="material-symbols-outlined text-[#FF9FCA] text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>edit_note</span>
+              <span className="text-[10px] font-medium text-[#FF9FCA]">{state.notes.length}</span>
             </button>
           )}
           {total > 0 && (
             <div className="flex items-center gap-2">
-              <div className="w-16 h-1.5 bg-[#E5E5EA] rounded-full overflow-hidden">
-                <div className="h-full bg-[#007AFF] rounded-full transition-all duration-700" style={{ width: `${total ? (done / total) * 100 : 0}%` }} />
+              <div className="w-16 h-1.5 bg-[#2A2A2A] rounded-full overflow-hidden">
+                <div className="h-full bg-[#FFD60A] rounded-full transition-all duration-700" style={{ width: `${total ? (done / total) * 100 : 0}%` }} />
               </div>
-              <span className="text-[10px] font-medium text-[#8E8E93]">{done}/{total}</span>
+              <span className="text-[10px] font-medium text-[#FF9FCA]">{done}/{total}</span>
             </div>
           )}
         </div>
       </header>
 
-      {/* Page title bar */}
-      <div className="fixed top-[52px] w-full z-20 bg-[#F2F2F7]/90 backdrop-blur-sm border-b border-[#E5E5EA] px-5 py-2">
-        <h2 className="text-[13px] font-semibold text-[#1C1C1E]">{activeTabLabel}</h2>
-      </div>
-
       {/* Main */}
-      <main className="pt-[92px] pb-10 px-4 md:px-6 max-w-4xl mx-auto space-y-5">
+      <main className="pt-[60px] pb-10 px-4 md:px-6 max-w-4xl mx-auto space-y-5">
 
         {activeTab === "vibe" && (
           <div className="space-y-5 animate-fade-in">
             <section className="pt-4">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#AEAEB2] mb-1.5">{today}</p>
-              <h2 className="text-[42px] font-bold text-[#1C1C1E] leading-tight tracking-tight">
-                {greeting},<br /><span className="text-[#007AFF]">Superstar.</span>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#AA7790] mb-1.5">{today}</p>
+              <h2 className="text-[42px] font-bold text-[#FFFDE7] leading-tight tracking-tight">
+                {greeting},<br /><span className="text-[#FFD60A]">Superstar.</span>
               </h2>
               {state.dayContext && (
-                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#AEAEB2] mt-2">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#AA7790] mt-2">
                   {state.dayContext.mood} · Energy {state.dayContext.energyLevel}/10
                   {deepWork > 0 && ` · Deep Work ${deepWork}%`}
                 </p>
@@ -350,7 +345,7 @@ function TypewriterSubtitle() {
   }, []);
 
   return (
-    <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#AEAEB2] mt-0.5 h-3 flex items-center">
+    <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#AA7790] mt-0.5 h-3 flex items-center">
       {display}<span className="ml-px" style={{ opacity: blink ? 1 : 0, transition: "opacity 0.1s" }}>|</span>
     </p>
   );
@@ -388,52 +383,52 @@ function MePanel({ tasks, dayContext, habits, focusSessions, onPlanDay, planLoad
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-[22px] font-bold text-[#1C1C1E] tracking-tight">Dashboard</h3>
-        <div className="bg-[#007AFF]/10 border border-[#007AFF]/20 px-3 py-1.5 rounded-full text-[10px] font-semibold text-[#007AFF] uppercase tracking-widest flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#007AFF] animate-pulse" />
+        <h3 className="text-[22px] font-bold text-[#FFFDE7] tracking-tight">Dashboard</h3>
+        <div className="bg-[#FFD60A]/10 border border-[#FFD60A]/20 px-3 py-1.5 rounded-full text-[10px] font-semibold text-[#FFD60A] uppercase tracking-widest flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FFD60A] animate-pulse" />
           {vibe}
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-3">
         {[
-          { icon: "check_circle", label: "Done",    value: done,    color: "text-[#34C759]" },
-          { icon: "pending",      label: "Pending", value: pending, color: "text-[#007AFF]" },
-          { icon: "play_circle",  label: "Active",  value: active,  color: "text-[#FF9500]" },
+          { icon: "check_circle", label: "Done",    value: done,    color: "text-[#FF3D9A]" },
+          { icon: "pending",      label: "Pending", value: pending, color: "text-[#FFD60A]" },
+          { icon: "play_circle",  label: "Active",  value: active,  color: "text-[#FFB830]" },
         ].map((s) => (
-          <div key={s.label} className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm p-4 text-center">
+          <div key={s.label} className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm p-4 text-center">
             <span className={`material-symbols-outlined text-2xl ${s.color} mb-1 block`} style={{ fontVariationSettings: "'FILL' 1" }}>{s.icon}</span>
             <p className={`text-3xl font-bold ${s.color}`}>{s.value}</p>
-            <p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">{s.label}</p>
+            <p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">{s.label}</p>
           </div>
         ))}
       </div>
 
-      <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm p-5 space-y-3">
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2]">Deep Work Today</p>
+      <div className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm p-5 space-y-3">
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">Deep Work Today</p>
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div><p className="text-3xl font-bold text-[#007AFF]">{deepWork}%</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">Index</p></div>
-          <div><p className="text-3xl font-bold text-[#007AFF]">{focusMins < 60 ? `${focusMins}m` : `${Math.floor(focusMins / 60)}h${focusMins % 60 > 0 ? `${focusMins % 60}m` : ""}`}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">Focus</p></div>
-          <div><p className="text-3xl font-bold text-[#007AFF]">{sessions}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">Sessions</p></div>
+          <div><p className="text-3xl font-bold text-[#FFD60A]">{deepWork}%</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">Index</p></div>
+          <div><p className="text-3xl font-bold text-[#FFD60A]">{focusMins < 60 ? `${focusMins}m` : `${Math.floor(focusMins / 60)}h${focusMins % 60 > 0 ? `${focusMins % 60}m` : ""}`}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">Focus</p></div>
+          <div><p className="text-3xl font-bold text-[#FFD60A]">{sessions}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">Sessions</p></div>
         </div>
-        <div className="w-full h-1.5 bg-[#E5E5EA] rounded-full overflow-hidden">
-          <div className="h-full rounded-full transition-all duration-700 bg-[#007AFF]" style={{ width: `${deepWork}%` }} />
+        <div className="w-full h-1.5 bg-[#2A2A2A] rounded-full overflow-hidden">
+          <div className="h-full rounded-full transition-all duration-700 bg-[#FFD60A]" style={{ width: `${deepWork}%` }} />
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm p-5 space-y-3">
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2]">Habit Progress</p>
+      <div className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm p-5 space-y-3">
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">Habit Progress</p>
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div><p className="text-3xl font-bold text-[#FF9500]">{habitScore}%</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">Today</p></div>
-          <div><p className="text-3xl font-bold text-[#FF9500]">{doneHabits}/{todayHabits.length}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">Done</p></div>
-          <div><p className="text-3xl font-bold text-[#FF9500]">{longestStreak}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">Streak 🔥</p></div>
+          <div><p className="text-3xl font-bold text-[#FFB830]">{habitScore}%</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">Today</p></div>
+          <div><p className="text-3xl font-bold text-[#FFB830]">{doneHabits}/{todayHabits.length}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">Done</p></div>
+          <div><p className="text-3xl font-bold text-[#FFB830]">{longestStreak}</p><p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">Streak 🔥</p></div>
         </div>
       </div>
 
       {dayContext && (
-        <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm p-5">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2] mb-2">Insight</p>
-          <p className="text-[14px] text-[#3C3C43] leading-relaxed">
+        <div className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm p-5">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-2">Insight</p>
+          <p className="text-[14px] text-[#FF9FCA] leading-relaxed">
             {`Running on ${dayContext.energyLevel}/10 energy${dayContext.sleepHours < 6 ? " — low sleep detected" : ""}. ${done > 0 ? `${done} task${done > 1 ? "s" : ""} completed.` : "No tasks done yet — start small."} ${deepWork >= 50 ? "Strong deep work today." : deepWork > 0 ? "Focus time building." : "Start a focus session to build momentum."}`}
           </p>
         </div>
@@ -444,8 +439,8 @@ function MePanel({ tasks, dayContext, habits, focusSessions, onPlanDay, planLoad
         disabled={planLoading || !dayContext || tasks.filter((t) => t.status !== "done").length === 0}
         className={`w-full py-4 rounded-2xl text-[13px] font-semibold flex items-center justify-center gap-2 transition-all ${
           planLoading || !dayContext
-            ? "bg-[#F2F2F7] text-[#AEAEB2] cursor-not-allowed border border-[#E5E5EA]"
-            : "bg-[#007AFF] text-white shadow-[0_4px_16px_rgba(0,122,255,0.3)] interactive-scale"
+            ? "bg-[#0C0C0C] text-[#AA7790] cursor-not-allowed border border-[#2A2A2A]"
+            : "bg-[#FFD60A] text-white shadow-[0_4px_16px_rgba(0,122,255,0.3)] interactive-scale"
         }`}
       >
         <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_fix_high</span>

@@ -14,10 +14,10 @@ interface Props {
 
 const categoryMeta: Record<HabitCategory, { icon: string; color: string; label: string }> = {
   health:      { icon: "favorite",         color: "text-[#FF3B30]",    label: "Health"      },
-  work:        { icon: "work",             color: "text-[#34C759]",  label: "Work"        },
-  learning:    { icon: "menu_book",        color: "text-[#FF9500]",  label: "Learning"    },
-  mindfulness: { icon: "self_improvement", color: "text-[#FF9500]",   label: "Mind"        },
-  social:      { icon: "group",            color: "text-[#34C759]",  label: "Social"      },
+  work:        { icon: "work",             color: "text-[#FF3D9A]",  label: "Work"        },
+  learning:    { icon: "menu_book",        color: "text-[#FFB830]",  label: "Learning"    },
+  mindfulness: { icon: "self_improvement", color: "text-[#FFB830]",   label: "Mind"        },
+  social:      { icon: "group",            color: "text-[#FF3D9A]",  label: "Social"      },
 };
 
 const frequencyLabel: Record<HabitFrequency, string> = {
@@ -70,16 +70,16 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
   const deleteHabit = (id: string) => onUpdate(habits.filter((h) => h.id !== id));
 
   return (
-    <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm overflow-hidden">
+    <div className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between p-5 border-b border-[#E5E5EA]">
+      <div className="flex items-center justify-between p-5 border-b border-[#2A2A2A]">
         <div className="flex items-center gap-3">
-          <span className="material-symbols-outlined text-[#FF9500] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+          <span className="material-symbols-outlined text-[#FFB830] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
             repeat
           </span>
           <div>
-            <h3 className="text-[18px] font-bold text-[#1C1C1E]">Habits</h3>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">
+            <h3 className="text-[18px] font-bold text-[#FFFDE7]">Habits</h3>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">
               {doneToday}/{totalDue} done today
             </p>
           </div>
@@ -88,8 +88,8 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
           onClick={() => setShowForm(!showForm)}
           className={`interactive-scale flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest font-bold transition-all ${
             showForm
-              ? "bg-[#F2F2F7] border border-[#E5E5EA] text-[#6C6C70]"
-              : "bg-[#FF9500]/10 border border-tertiary/30 text-[#FF9500] hover:bg-tertiary/20"
+              ? "bg-[#0C0C0C] border border-[#2A2A2A] text-[#FF9FCA]"
+              : "bg-[#FFB830]/10 border border-tertiary/30 text-[#FFB830] hover:bg-tertiary/20"
           }`}
         >
           <span className="material-symbols-outlined text-sm">{showForm ? "close" : "add"}</span>
@@ -101,10 +101,10 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
       {totalDue > 0 && (
         <div className="px-5 pt-4 pb-2">
           <div className="flex justify-between items-baseline mb-1.5">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">Today&apos;s Progress</p>
-            <span className="font-headline text-lg font-bold text-[#FF9500]">{completion}%</span>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">Today&apos;s Progress</p>
+            <span className="font-headline text-lg font-bold text-[#FFB830]">{completion}%</span>
           </div>
-          <div className="w-full h-1.5 bg-[#F2F2F7] rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-[#0C0C0C] rounded-full overflow-hidden">
             <div
               className="h-full rounded-full transition-all duration-700"
               style={{ width: `${completion}%`, background: "linear-gradient(to right, #FFF8E7, #95BBEA)" }}
@@ -115,24 +115,24 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
 
       {/* Add form */}
       {showForm && (
-        <div className="mx-5 mb-4 mt-3 bg-[#F2F2F7] rounded-xl border border-[#E5E5EA] p-4 space-y-3 animate-slide-up">
+        <div className="mx-5 mb-4 mt-3 bg-[#0C0C0C] rounded-xl border border-[#2A2A2A] p-4 space-y-3 animate-slide-up">
           <input
             type="text" value={title} onChange={(e) => setTitle(e.target.value)}
             placeholder="Habit name…"
             autoFocus
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-            className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-4 py-2.5 text-sm text-[#1C1C1E] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 transition-all"
+            className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-4 py-2.5 text-sm text-[#FFFDE7] placeholder-[#C6C6C8] focus:outline-none focus:border-[#FFD60A]/40 transition-all"
           />
           <textarea
             value={desc} onChange={(e) => setDesc(e.target.value)}
             placeholder="Why this habit? (optional)"
             rows={2}
-            className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-4 py-2.5 text-sm text-[#3C3C43] placeholder-[#C6C6C8] resize-none focus:outline-none focus:border-[#007AFF]/40 transition-all"
+            className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-4 py-2.5 text-sm text-[#FF9FCA] placeholder-[#C6C6C8] resize-none focus:outline-none focus:border-[#FFD60A]/40 transition-all"
           />
 
           {/* Category */}
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-2">Category</p>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-2">Category</p>
             <div className="grid grid-cols-5 gap-1.5">
               {(Object.keys(categoryMeta) as HabitCategory[]).map((c) => (
                 <button
@@ -141,11 +141,11 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
                   title={categoryMeta[c].label}
                   className={`py-2 rounded-lg text-center border transition-all interactive-scale ${
                     cat === c
-                      ? "border-primary-fixed/40 bg-[#007AFF]/10 text-[#1C1C1E]"
-                      : "border-[#E5E5EA] bg-[#F2F2F7] text-[#8E8E93] hover:border-[#007AFF]/30"
+                      ? "border-primary-fixed/40 bg-[#FFD60A]/10 text-[#FFFDE7]"
+                      : "border-[#2A2A2A] bg-[#0C0C0C] text-[#AA7790] hover:border-[#FFD60A]/30"
                   }`}
                 >
-                  <span className={`material-symbols-outlined text-base ${cat === c ? "text-[#1C1C1E]" : categoryMeta[c].color}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className={`material-symbols-outlined text-base ${cat === c ? "text-[#FFFDE7]" : categoryMeta[c].color}`} style={{ fontVariationSettings: "'FILL' 1" }}>
                     {categoryMeta[c].icon}
                   </span>
                 </button>
@@ -156,10 +156,10 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
           {/* Frequency + Energy */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-2">Frequency</p>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-2">Frequency</p>
               <select
                 value={freq} onChange={(e) => setFreq(e.target.value as HabitFrequency)}
-                className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2 text-xs text-[#3C3C43] focus:outline-none focus:border-[#007AFF]/40"
+                className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2 text-xs text-[#FF9FCA] focus:outline-none focus:border-[#FFD60A]/40"
               >
                 <option value="daily">Daily</option>
                 <option value="weekdays">Weekdays</option>
@@ -168,10 +168,10 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
               </select>
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-2">Energy needed</p>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-2">Energy needed</p>
               <select
                 value={energy} onChange={(e) => setEnergy(e.target.value as EnergyRequired)}
-                className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2 text-xs text-[#3C3C43] focus:outline-none focus:border-[#007AFF]/40"
+                className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2 text-xs text-[#FF9FCA] focus:outline-none focus:border-[#FFD60A]/40"
               >
                 <option value="high">⚡ High</option>
                 <option value="medium">🔋 Medium</option>
@@ -183,15 +183,15 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
           {/* Duration */}
           <div>
             <div className="flex justify-between items-baseline mb-2">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">Target duration</p>
-              <span className="font-headline text-lg font-bold text-[#007AFF]">{mins} min</span>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">Target duration</p>
+              <span className="font-headline text-lg font-bold text-[#FFD60A]">{mins} min</span>
             </div>
             <input
               type="range" min={5} max={120} step={5} value={mins}
               onChange={(e) => setMins(Number(e.target.value))}
               className="w-full"
               style={{
-                background: `linear-gradient(to right, #007AFF 0%, #007AFF ${((mins - 5) / 115) * 100}%, #E5E5EA ${((mins - 5) / 115) * 100}%, #E5E5EA 100%)`,
+                background: `linear-gradient(to right, #FFD60A 0%, #FFD60A ${((mins - 5) / 115) * 100}%, #E5E5EA ${((mins - 5) / 115) * 100}%, #E5E5EA 100%)`,
               }}
             />
           </div>
@@ -201,8 +201,8 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
             disabled={!title.trim()}
             className={`glimmer-btn w-full py-2.5 rounded-lg font-label text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${
               title.trim()
-                ? "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] shadow-[0_4px_16px_rgba(0,122,255,0.25)] interactive-scale"
-                : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
+                ? "bg-gradient-to-r bg-[#FFD60A] from-[#FFD60A] to-[#FFD60A] text-[#FFFDE7] shadow-[0_4px_16px_rgba(0,122,255,0.25)] interactive-scale"
+                : "bg-[#141414] text-[#AA7790] cursor-not-allowed"
             }`}
           >
             Add Habit
@@ -211,11 +211,11 @@ export default function HabitsTracker({ habits, onUpdate }: Props) {
       )}
 
       {/* Habits list */}
-      <div className="divide-y divide-[#F2F2F7]">
+      <div className="divide-y divide-[#222222]">
         {habits.length === 0 && !showForm && (
           <div className="py-10 text-center">
             <span className="material-symbols-outlined text-4xl text-[#C6C6C8] block mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>repeat</span>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2]">Add your first habit above</p>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">Add your first habit above</p>
           </div>
         )}
         {habits.map((habit) => (
@@ -256,12 +256,12 @@ function HabitRow({
             done
               ? "bg-green-500/20 border-green-500/40"
               : isDue
-              ? "bg-[#F8F8F8] border-[#E5E5EA] hover:border-[#007AFF]/25"
-              : "bg-[#F8F8F8] border-[#F2F2F7] cursor-default opacity-40"
+              ? "bg-[#141414] border-[#2A2A2A] hover:border-[#FFD60A]/25"
+              : "bg-[#141414] border-[#F2F2F7] cursor-default opacity-40"
           }`}
         >
           <span
-            className={`material-symbols-outlined text-base transition-colors ${done ? "text-[#34C759]" : "text-[#8E8E93]"}`}
+            className={`material-symbols-outlined text-base transition-colors ${done ? "text-[#FF3D9A]" : "text-[#AA7790]"}`}
             style={{ fontVariationSettings: done ? "'FILL' 1" : "'FILL' 0" }}
           >
             {done ? "check_circle" : "radio_button_unchecked"}
@@ -277,21 +277,21 @@ function HabitRow({
             >
               {meta.icon}
             </span>
-            <p className={`text-sm font-medium leading-snug ${done ? "line-through text-[#8E8E93]" : "text-white/85"}`}>
+            <p className={`text-sm font-medium leading-snug ${done ? "line-through text-[#AA7790]" : "text-white/85"}`}>
               {habit.title}
             </p>
             {!isDue && (
-              <span className="font-label text-[8px] text-[#AEAEB2] uppercase tracking-widest">
+              <span className="font-label text-[8px] text-[#AA7790] uppercase tracking-widest">
                 Not today
               </span>
             )}
           </div>
           <div className="flex items-center gap-3 mt-1">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[#AEAEB2]">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-[#AA7790]">
               {frequencyLabel[habit.frequency]} · {habit.targetMinutes}min
             </p>
             {streak > 0 && (
-              <span className="font-label text-[9px] text-[#FF9500]/70 flex items-center gap-0.5">
+              <span className="font-label text-[9px] text-[#FFB830]/70 flex items-center gap-0.5">
                 🔥 {streak}
               </span>
             )}
@@ -309,11 +309,11 @@ function HabitRow({
                     log.completed
                       ? "bg-green-500/60"
                       : isToday
-                      ? "bg-[#F2F2F7] ring-1 ring-white/20"
-                      : "bg-[#F2F2F7]"
+                      ? "bg-[#0C0C0C] ring-1 ring-white/20"
+                      : "bg-[#0C0C0C]"
                   }`}
                 >
-                  <span className="font-label text-[7px] text-[#AEAEB2]">{dayLabels[new Date(log.date + "T12:00:00").getDay() === 0 ? 6 : new Date(log.date + "T12:00:00").getDay() - 1]}</span>
+                  <span className="font-label text-[7px] text-[#AA7790]">{dayLabels[new Date(log.date + "T12:00:00").getDay() === 0 ? 6 : new Date(log.date + "T12:00:00").getDay() - 1]}</span>
                 </div>
               );
             })}

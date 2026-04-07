@@ -60,26 +60,26 @@ export default function WellnessReminders({ reminders, onUpdate }: Props) {
     onUpdate(reminders.map((r) => r.id === id ? { ...r, enabled: !r.enabled } : r));
 
   return (
-    <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm overflow-hidden">
+    <div className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm overflow-hidden">
       {/* Active alert */}
       {alert && (
-        <div className="bg-[#FF9500]/5 border-b border-[#FF9500]/15 p-5 animate-slide-up">
+        <div className="bg-[#FFB830]/10 border-b border-[#FFB830]/20 p-5 animate-slide-up">
           <div className="flex items-start gap-4">
-            <div className="w-11 h-11 bg-[#FF9500]/10 rounded-full flex items-center justify-center border border-[#FF9500]/20 shrink-0">
+            <div className="w-11 h-11 bg-[#FFB830]/10 rounded-full flex items-center justify-center border border-[#FFB830]/20 shrink-0">
               <span
-                className="material-symbols-outlined text-[#FF9500] text-xl"
+                className="material-symbols-outlined text-[#FFB830] text-xl"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 {icons[alert.type] ?? "notifications"}
               </span>
             </div>
             <div className="flex-1">
-              <p className="text-[16px] font-bold text-[#1C1C1E]">{alert.label}</p>
-              <p className="text-sm text-[#6C6C70] mt-0.5">{messages[alert.type]}</p>
+              <p className="text-[16px] font-bold text-[#FFFDE7]">{alert.label}</p>
+              <p className="text-sm text-[#FF9FCA] mt-0.5">{messages[alert.type]}</p>
               <div className="flex flex-wrap gap-2 mt-3">
                 <button
                   onClick={dismiss}
-                  className="glimmer-btn px-4 py-1.5 bg-tertiary/20 border border-tertiary/30 text-[#FF9500] rounded-full text-[10px] font-semibold uppercase tracking-widest interactive-scale"
+                  className="glimmer-btn px-4 py-1.5 bg-tertiary/20 border border-tertiary/30 text-[#FFB830] rounded-full text-[10px] font-semibold uppercase tracking-widest interactive-scale"
                 >
                   ✓ Done
                 </button>
@@ -87,7 +87,7 @@ export default function WellnessReminders({ reminders, onUpdate }: Props) {
                   <button
                     key={m}
                     onClick={() => snooze(m)}
-                    className="px-4 py-1.5 bg-[#F2F2F7] border border-[#E5E5EA] text-[#6C6C70] rounded-full text-[10px] font-semibold uppercase tracking-widest interactive-scale hover:text-[#3C3C43]"
+                    className="px-4 py-1.5 bg-[#0C0C0C] border border-[#2A2A2A] text-[#FF9FCA] rounded-full text-[10px] font-semibold uppercase tracking-widest interactive-scale hover:text-[#FF9FCA]"
                   >
                     Snooze {m}m
                   </button>
@@ -101,24 +101,24 @@ export default function WellnessReminders({ reminders, onUpdate }: Props) {
       {/* Header toggle */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between p-5 hover:bg-[#F8F8F8] transition-colors"
+        className="w-full flex items-center justify-between p-5 hover:bg-[#141414] transition-colors"
       >
         <div className="flex items-center gap-3">
           <span
-            className="material-symbols-outlined text-[#34C759] text-xl"
+            className="material-symbols-outlined text-[#FF3D9A] text-xl"
             style={{ fontVariationSettings: "'FILL' 1" }}
           >
             notifications_active
           </span>
           <div className="text-left">
-            <p className="text-[16px] font-bold text-[#1C1C1E]">Wellness Reminders</p>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">
+            <p className="text-[16px] font-bold text-[#FFFDE7]">Wellness Reminders</p>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">
               {reminders.filter((r) => r.enabled).length} active
             </p>
           </div>
         </div>
         <span
-          className={`material-symbols-outlined text-[#AEAEB2] transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
+          className={`material-symbols-outlined text-[#AA7790] transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
         >
           expand_more
         </span>
@@ -126,7 +126,7 @@ export default function WellnessReminders({ reminders, onUpdate }: Props) {
 
       {/* Reminder rows */}
       {expanded && (
-        <div className="border-t border-[#E5E5EA] divide-y divide-[#F2F2F7] animate-fade-in">
+        <div className="border-t border-[#2A2A2A] divide-y divide-[#222222] animate-fade-in">
           {reminders.map((r) => {
             const last   = r.lastTriggered ? new Date(r.lastTriggered).getTime() : 0;
             const nextIn = Math.max(0, Math.round((last + r.intervalMinutes * 60_000 - Date.now()) / 60_000));
@@ -138,11 +138,11 @@ export default function WellnessReminders({ reminders, onUpdate }: Props) {
               >
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center border shrink-0 ${
                   r.enabled
-                    ? "bg-[#34C759]/10 border-[#34C759]/20"
-                    : "bg-[#F8F8F8] border-[#E5E5EA]"
+                    ? "bg-[#FF3D9A]/10 border-[#FF3D9A]/20"
+                    : "bg-[#141414] border-[#2A2A2A]"
                 }`}>
                   <span
-                    className={`material-symbols-outlined text-lg ${r.enabled ? "text-[#34C759]" : "text-[#8E8E93]"}`}
+                    className={`material-symbols-outlined text-lg ${r.enabled ? "text-[#FF3D9A]" : "text-[#AA7790]"}`}
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     {icons[r.type] ?? "notifications"}
@@ -150,11 +150,11 @@ export default function WellnessReminders({ reminders, onUpdate }: Props) {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-[#1C1C1E]">{r.label}</p>
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-[#AEAEB2]">
+                  <p className="text-sm font-medium text-[#FFFDE7]">{r.label}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-[#AA7790]">
                     Every {r.intervalMinutes}min
                     {r.enabled && (
-                      <span className="ml-1 text-[#34C759]">
+                      <span className="ml-1 text-[#FF3D9A]">
                         · next in {nextIn < 1 ? "&lt;1" : nextIn}m
                       </span>
                     )}
@@ -168,15 +168,15 @@ export default function WellnessReminders({ reminders, onUpdate }: Props) {
                   role="switch"
                   className={`relative w-10 h-5 rounded-full border transition-all duration-300 shrink-0 ${
                     r.enabled
-                      ? "bg-secondary/20 border-[#007AFF]/40"
-                      : "bg-[#F8F8F8] border-[#E5E5EA]"
+                      ? "bg-secondary/20 border-[#FFD60A]/40"
+                      : "bg-[#141414] border-[#2A2A2A]"
                   }`}
                 >
                   <span
                     className={`absolute top-0.5 w-4 h-4 rounded-full transition-all duration-300 ${
                       r.enabled
                         ? "left-5 bg-secondary shadow-[0_0_8px_rgba(149,187,234,0.5)]"
-                        : "left-0.5 bg-white/30"
+                        : "left-0.5 bg-[#1A1A1A]/30"
                     }`}
                     style={{ transform: "none" }}
                   />

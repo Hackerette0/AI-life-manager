@@ -1,8 +1,11 @@
-import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 import { NextRequest } from "next/server";
 import { Task, DayContext, Habit, CalendarEvent, FocusSession } from "@/lib/types";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://openrouter.ai/api/v1",
+});
 
 function getEnergyLabel(level: number): string {
   if (level <= 2) return "Depleted";
@@ -133,15 +136,17 @@ Schedule from ${now} until ~21:00. Use 24-hour HH:MM format. Make it human and a
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        const messageStream = client.messages.stream({
-          model: "claude-opus-4-6",
+        const messageStream = await client.chat.completions.create({
+          model: "qwen/qwen3.6-plus:free",
           max_tokens: 4096,
           messages: [{ role: "user", content: prompt }],
+          stream: true,
         });
 
-        for await (const event of messageStream) {
-          if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`));
+        for await (const chunk of messageStream) {
+          const text = chunk.choices[0]?.delta?.content || "";
+          if (text) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
           }
         }
 

@@ -24,10 +24,10 @@ interface IntegrationMeta {
 
 const INTEGRATIONS: IntegrationMeta[] = [
   { id: "google_calendar", name: "Google Calendar", icon: "calendar_month",   description: "Sync events, meetings and time blocks with your Google Calendar.", color: "border-[#FF3B30]/20 bg-red-400/[0.06]",    iconColor: "text-[#FF3B30]"    },
-  { id: "notion",          name: "Notion",          icon: "article",          description: "Import pages and database items as tasks or notes.",               color: "border-[#E5E5EA]  bg-[#F2F2F7]",       iconColor: "text-[#6C6C70]"   },
-  { id: "github",          name: "GitHub",          icon: "code",             description: "Pull open issues and PRs from your repositories as tasks.",        color: "border-[#E5E5EA]  bg-[#F2F2F7]",       iconColor: "text-[#6C6C70]"   },
-  { id: "excel",           name: "Excel / CSV",     icon: "table_chart",      description: "Import tasks from any Excel or CSV spreadsheet.",                  color: "border-green-400/20 bg-green-400/[0.06]",iconColor: "text-[#34C759]"  },
-  { id: "linkedin",        name: "LinkedIn",        icon: "work",             description: "Link your LinkedIn profile for career context in planning.",       color: "border-[#34C759]/20 bg-secondary/[0.06]",iconColor: "text-[#34C759]"  },
+  { id: "notion",          name: "Notion",          icon: "article",          description: "Import pages and database items as tasks or notes.",               color: "border-[#2A2A2A]  bg-[#0C0C0C]",       iconColor: "text-[#FF9FCA]"   },
+  { id: "github",          name: "GitHub",          icon: "code",             description: "Pull open issues and PRs from your repositories as tasks.",        color: "border-[#2A2A2A]  bg-[#0C0C0C]",       iconColor: "text-[#FF9FCA]"   },
+  { id: "excel",           name: "Excel / CSV",     icon: "table_chart",      description: "Import tasks from any Excel or CSV spreadsheet.",                  color: "border-green-400/20 bg-green-400/[0.06]",iconColor: "text-[#FF3D9A]"  },
+  { id: "linkedin",        name: "LinkedIn",        icon: "work",             description: "Link your LinkedIn profile for career context in planning.",       color: "border-[#FF3D9A]/20 bg-secondary/[0.06]",iconColor: "text-[#FF3D9A]"  },
 ];
 
 export default function IntegrationsHub({
@@ -207,8 +207,8 @@ export default function IntegrationsHub({
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="text-[22px] font-bold text-[#1C1C1E]">Connect</h3>
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">
+        <h3 className="text-[22px] font-bold text-[#FFFDE7]">Connect</h3>
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">
           Integrations · {integrations.filter((i) => i.connected).length} connected
         </p>
       </div>
@@ -222,13 +222,13 @@ export default function IntegrationsHub({
           const cfg         = integration.config;
 
           return (
-            <div key={meta.id} className={`bg-white rounded-2xl border border-[#E5E5EA] shadow-sm overflow-hidden border ${meta.color}`}>
+            <div key={meta.id} className={`bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm overflow-hidden border ${meta.color}`}>
               {/* Row */}
               <button
                 className="w-full flex items-center gap-4 p-4 text-left interactive-scale"
                 onClick={() => setActiveId(isActive ? null : meta.id)}
               >
-                <div className={`w-10 h-10 rounded-lg bg-[#F2F2F7] border border-[#E5E5EA] flex items-center justify-center shrink-0`}>
+                <div className={`w-10 h-10 rounded-lg bg-[#0C0C0C] border border-[#2A2A2A] flex items-center justify-center shrink-0`}>
                   <span className={`material-symbols-outlined text-xl ${meta.iconColor}`} style={{ fontVariationSettings: "'FILL' 1" }}>
                     {meta.icon}
                   </span>
@@ -237,33 +237,33 @@ export default function IntegrationsHub({
                   <div className="flex items-center gap-2">
                     <p className="font-body text-sm font-semibold text-white/85">{meta.name}</p>
                     {integration.connected && (
-                      <span className="flex items-center gap-1 text-[9px] font-semibold uppercase tracking-widest text-[#34C759] bg-green-400/10 border border-green-400/20 px-2 py-0.5 rounded-full">
+                      <span className="flex items-center gap-1 text-[9px] font-semibold uppercase tracking-widest text-[#FF3D9A] bg-green-400/10 border border-green-400/20 px-2 py-0.5 rounded-full">
                         <span className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
                         Connected
                       </span>
                     )}
                   </div>
-                  <p className="font-label text-[9px] text-[#8E8E93] mt-0.5">{meta.description}</p>
+                  <p className="font-label text-[9px] text-[#AA7790] mt-0.5">{meta.description}</p>
                   {integration.lastSynced && (
-                    <p className="font-label text-[8px] text-[#AEAEB2] mt-0.5">
+                    <p className="font-label text-[8px] text-[#AA7790] mt-0.5">
                       Last synced {new Date(integration.lastSynced).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                       {integration.importedCount != null && integration.importedCount > 0 && ` · ${integration.importedCount} items`}
                     </p>
                   )}
                 </div>
-                <span className={`material-symbols-outlined text-sm text-[#AEAEB2] transition-transform ${isActive ? "rotate-180" : ""}`}>
+                <span className={`material-symbols-outlined text-sm text-[#AA7790] transition-transform ${isActive ? "rotate-180" : ""}`}>
                   expand_more
                 </span>
               </button>
 
               {/* Expanded config panel */}
               {isActive && (
-                <div className="border-t border-[#E5E5EA] p-4 space-y-3 animate-slide-up">
+                <div className="border-t border-[#2A2A2A] p-4 space-y-3 animate-slide-up">
 
                   {/* Feedback */}
                   {fb && (
                     <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs ${
-                      fb.ok ? "bg-green-500/10 border-green-500/25 text-[#34C759]" : "bg-red-500/10 border-red-500/25 text-[#FF3B30]"
+                      fb.ok ? "bg-green-500/10 border-green-500/25 text-[#FF3D9A]" : "bg-red-500/10 border-red-500/25 text-[#FF3B30]"
                     }`}>
                       <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
                         {fb.ok ? "check_circle" : "error"}
@@ -276,26 +276,26 @@ export default function IntegrationsHub({
                   {meta.id === "github" && (
                     <>
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-1.5">Personal Access Token</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-1.5">Personal Access Token</p>
                         <input
                           type="password"
                           value={cfg.token ?? ""}
                           onChange={(e) => updateConfig("github", "token", e.target.value)}
                           placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
-                          className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2.5 text-sm text-[#3C3C43] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 font-mono"
+                          className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2.5 text-sm text-[#FF9FCA] placeholder-[#C6C6C8] focus:outline-none focus:border-[#FFD60A]/40 font-mono"
                         />
-                        <p className="font-label text-[8px] text-[#AEAEB2] mt-1">
+                        <p className="font-label text-[8px] text-[#AA7790] mt-1">
                           Generate at github.com → Settings → Developer settings → Personal access tokens
                         </p>
                       </div>
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-1.5">Repository</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-1.5">Repository</p>
                         <input
                           type="text"
                           value={cfg.repo ?? ""}
                           onChange={(e) => updateConfig("github", "repo", e.target.value)}
                           placeholder="owner/repository-name"
-                          className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2.5 text-sm text-[#3C3C43] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 font-mono"
+                          className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2.5 text-sm text-[#FF9FCA] placeholder-[#C6C6C8] focus:outline-none focus:border-[#FFD60A]/40 font-mono"
                         />
                       </div>
                       <div className="flex gap-2">
@@ -304,15 +304,15 @@ export default function IntegrationsHub({
                           disabled={!cfg.token || !cfg.repo || isLoading}
                           className={`flex-1 py-2.5 rounded-lg text-[10px] font-semibold uppercase tracking-widest font-bold transition-all glimmer-btn flex items-center justify-center gap-2 ${
                             cfg.token && cfg.repo && !isLoading
-                              ? "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] interactive-scale"
-                              : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
+                              ? "bg-gradient-to-r bg-[#FFD60A] from-[#FFD60A] to-[#FFD60A] text-[#FFFDE7] interactive-scale"
+                              : "bg-[#141414] text-[#AA7790] cursor-not-allowed"
                           }`}
                         >
                           {isLoading ? <span className="material-symbols-outlined text-sm animate-spin">refresh</span> : <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>download</span>}
                           {isLoading ? "Syncing…" : "Sync Issues"}
                         </button>
                         {integration.connected && (
-                          <button onClick={() => disconnect("github")} className="px-4 py-2.5 rounded-lg bg-[#F2F2F7] border border-[#E5E5EA] text-[#8E8E93] text-[10px] font-semibold uppercase tracking-widest interactive-scale">
+                          <button onClick={() => disconnect("github")} className="px-4 py-2.5 rounded-lg bg-[#0C0C0C] border border-[#2A2A2A] text-[#AA7790] text-[10px] font-semibold uppercase tracking-widest interactive-scale">
                             Disconnect
                           </button>
                         )}
@@ -324,28 +324,28 @@ export default function IntegrationsHub({
                   {meta.id === "notion" && (
                     <>
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-1.5">Integration Token</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-1.5">Integration Token</p>
                         <input
                           type="password"
                           value={cfg.apiKey ?? ""}
                           onChange={(e) => updateConfig("notion", "apiKey", e.target.value)}
                           placeholder="secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                          className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2.5 text-sm text-[#3C3C43] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 font-mono"
+                          className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2.5 text-sm text-[#FF9FCA] placeholder-[#C6C6C8] focus:outline-none focus:border-[#FFD60A]/40 font-mono"
                         />
-                        <p className="font-label text-[8px] text-[#AEAEB2] mt-1">
+                        <p className="font-label text-[8px] text-[#AA7790] mt-1">
                           Create at notion.so → Settings → Integrations → New Integration
                         </p>
                       </div>
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-1.5">Database ID</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-1.5">Database ID</p>
                         <input
                           type="text"
                           value={cfg.databaseId ?? ""}
                           onChange={(e) => updateConfig("notion", "databaseId", e.target.value)}
                           placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                          className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2.5 text-sm text-[#3C3C43] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 font-mono"
+                          className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2.5 text-sm text-[#FF9FCA] placeholder-[#C6C6C8] focus:outline-none focus:border-[#FFD60A]/40 font-mono"
                         />
-                        <p className="font-label text-[8px] text-[#AEAEB2] mt-1">
+                        <p className="font-label text-[8px] text-[#AA7790] mt-1">
                           Copy from your Notion database URL: notion.so/[workspace]/[DATABASE_ID]?v=...
                         </p>
                       </div>
@@ -355,15 +355,15 @@ export default function IntegrationsHub({
                           disabled={!cfg.apiKey || !cfg.databaseId || isLoading}
                           className={`flex-1 py-2.5 rounded-lg text-[10px] font-semibold uppercase tracking-widest font-bold transition-all glimmer-btn flex items-center justify-center gap-2 ${
                             cfg.apiKey && cfg.databaseId && !isLoading
-                              ? "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] interactive-scale"
-                              : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
+                              ? "bg-gradient-to-r bg-[#FFD60A] from-[#FFD60A] to-[#FFD60A] text-[#FFFDE7] interactive-scale"
+                              : "bg-[#141414] text-[#AA7790] cursor-not-allowed"
                           }`}
                         >
                           {isLoading ? <span className="material-symbols-outlined text-sm animate-spin">refresh</span> : <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>download</span>}
                           {isLoading ? "Syncing…" : "Sync Notion"}
                         </button>
                         {integration.connected && (
-                          <button onClick={() => disconnect("notion")} className="px-4 py-2.5 rounded-lg bg-[#F2F2F7] border border-[#E5E5EA] text-[#8E8E93] text-[10px] font-semibold uppercase tracking-widest interactive-scale">
+                          <button onClick={() => disconnect("notion")} className="px-4 py-2.5 rounded-lg bg-[#0C0C0C] border border-[#2A2A2A] text-[#AA7790] text-[10px] font-semibold uppercase tracking-widest interactive-scale">
                             Disconnect
                           </button>
                         )}
@@ -374,17 +374,17 @@ export default function IntegrationsHub({
                   {/* ── Google Calendar config ── */}
                   {meta.id === "google_calendar" && (
                     <>
-                      <div className="bg-[#F2F2F7] rounded-xl border border-secondary/15 p-3.5 space-y-2">
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#34C759]">Setup Instructions</p>
-                        <ol className="text-xs text-[#8E8E93] leading-relaxed space-y-1 list-decimal list-inside">
-                          <li>Go to <span className="text-[#34C759]">console.cloud.google.com</span></li>
+                      <div className="bg-[#0C0C0C] rounded-xl border border-secondary/15 p-3.5 space-y-2">
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#FF3D9A]">Setup Instructions</p>
+                        <ol className="text-xs text-[#AA7790] leading-relaxed space-y-1 list-decimal list-inside">
+                          <li>Go to <span className="text-[#FF3D9A]">console.cloud.google.com</span></li>
                           <li>Create a project → Enable Google Calendar API</li>
                           <li>Create OAuth 2.0 credentials → Web Application</li>
-                          <li>Add to <span className="text-[#34C759]">.env.local</span>: GOOGLE_CLIENT_ID + GOOGLE_CLIENT_SECRET</li>
+                          <li>Add to <span className="text-[#FF3D9A]">.env.local</span>: GOOGLE_CLIENT_ID + GOOGLE_CLIENT_SECRET</li>
                           <li>Until then, add events manually in the Planner tab</li>
                         </ol>
                       </div>
-                      <button onClick={saveGCal} className="w-full py-2.5 rounded-lg bg-[#F2F2F7] border border-[#E5E5EA] text-[#6C6C70] text-[10px] font-semibold uppercase tracking-widest interactive-scale">
+                      <button onClick={saveGCal} className="w-full py-2.5 rounded-lg bg-[#0C0C0C] border border-[#2A2A2A] text-[#FF9FCA] text-[10px] font-semibold uppercase tracking-widest interactive-scale">
                         Mark as Set Up
                       </button>
                     </>
@@ -393,17 +393,17 @@ export default function IntegrationsHub({
                   {/* ── CSV / Excel config ── */}
                   {meta.id === "excel" && (
                     <>
-                      <div className="bg-[#F2F2F7] rounded-xl border border-[#E5E5EA] p-3.5 space-y-1.5">
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">Supported columns</p>
-                        <p className="text-xs text-[#8E8E93] leading-relaxed">
-                          <span className="text-[#6C6C70]">title/task/name</span> · <span className="text-[#6C6C70]">priority</span> (high/medium/low) · <span className="text-[#6C6C70]">description/notes</span> · <span className="text-[#6C6C70]">minutes/duration</span>
+                      <div className="bg-[#0C0C0C] rounded-xl border border-[#2A2A2A] p-3.5 space-y-1.5">
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">Supported columns</p>
+                        <p className="text-xs text-[#AA7790] leading-relaxed">
+                          <span className="text-[#FF9FCA]">title/task/name</span> · <span className="text-[#FF9FCA]">priority</span> (high/medium/low) · <span className="text-[#FF9FCA]">description/notes</span> · <span className="text-[#FF9FCA]">minutes/duration</span>
                         </p>
-                        <p className="text-xs text-[#AEAEB2]">First row must be headers. Exported from Excel, Google Sheets, or Notion.</p>
+                        <p className="text-xs text-[#AA7790]">First row must be headers. Exported from Excel, Google Sheets, or Notion.</p>
                       </div>
                       <input ref={fileRef} type="file" accept=".csv,.txt" className="hidden" onChange={handleCSV} />
                       <button
                         onClick={() => fileRef.current?.click()}
-                        className="glimmer-btn w-full py-2.5 rounded-lg text-[10px] font-semibold uppercase tracking-widest font-bold bg-gradient-to-r from-green-600 to-green-700 text-[#1C1C1E] interactive-scale flex items-center justify-center gap-2"
+                        className="glimmer-btn w-full py-2.5 rounded-lg text-[10px] font-semibold uppercase tracking-widest font-bold bg-gradient-to-r from-green-600 to-green-700 text-[#FFFDE7] interactive-scale flex items-center justify-center gap-2"
                       >
                         <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                         Upload CSV / Excel
@@ -415,15 +415,15 @@ export default function IntegrationsHub({
                   {meta.id === "linkedin" && (
                     <>
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-1.5">Profile URL</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-1.5">Profile URL</p>
                         <input
                           type="url"
                           value={cfg.profileUrl ?? ""}
                           onChange={(e) => updateConfig("linkedin", "profileUrl", e.target.value)}
                           placeholder="https://linkedin.com/in/your-username"
-                          className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2.5 text-sm text-[#3C3C43] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40"
+                          className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2.5 text-sm text-[#FF9FCA] placeholder-[#C6C6C8] focus:outline-none focus:border-[#FFD60A]/40"
                         />
-                        <p className="font-label text-[8px] text-[#AEAEB2] mt-1">
+                        <p className="font-label text-[8px] text-[#AA7790] mt-1">
                           LinkedIn&apos;s API is read-only and restricted. This links your profile for quick access.
                         </p>
                       </div>
@@ -433,8 +433,8 @@ export default function IntegrationsHub({
                           disabled={!cfg.profileUrl}
                           className={`flex-1 py-2.5 rounded-lg text-[10px] font-semibold uppercase tracking-widest font-bold transition-all ${
                             cfg.profileUrl
-                              ? "bg-gradient-to-r from-[#007AFF] to-[#007AFF] text-[#0d1f30] interactive-scale"
-                              : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
+                              ? "bg-gradient-to-r from-[#FFD60A] to-[#FFD60A] text-[#0d1f30] interactive-scale"
+                              : "bg-[#141414] text-[#AA7790] cursor-not-allowed"
                           }`}
                         >
                           Save Profile
@@ -444,7 +444,7 @@ export default function IntegrationsHub({
                             href={cfg.profileUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-4 py-2.5 rounded-lg bg-[#F2F2F7] border border-[#34C759]/20 text-[#34C759] text-[10px] font-semibold uppercase tracking-widest interactive-scale flex items-center gap-1"
+                            className="px-4 py-2.5 rounded-lg bg-[#0C0C0C] border border-[#FF3D9A]/20 text-[#FF3D9A] text-[10px] font-semibold uppercase tracking-widest interactive-scale flex items-center gap-1"
                           >
                             <span className="material-symbols-outlined text-sm">open_in_new</span>
                             View
@@ -461,18 +461,18 @@ export default function IntegrationsHub({
       </div>
 
       {/* Stats */}
-      <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm p-4">
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2] mb-3">Workspace</p>
+      <div className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm p-4">
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-3">Workspace</p>
         <div className="grid grid-cols-3 gap-3 text-center">
           {[
-            { icon: "task_alt",  label: "Tasks",  value: tasks.length,  color: "text-[#007AFF]" },
-            { icon: "edit_note", label: "Notes",  value: notes.length,  color: "text-[#34C759]"     },
-            { icon: "hub",       label: "Connected", value: integrations.filter((i) => i.connected).length, color: "text-[#34C759]" },
+            { icon: "task_alt",  label: "Tasks",  value: tasks.length,  color: "text-[#FFD60A]" },
+            { icon: "edit_note", label: "Notes",  value: notes.length,  color: "text-[#FF3D9A]"     },
+            { icon: "hub",       label: "Connected", value: integrations.filter((i) => i.connected).length, color: "text-[#FF3D9A]" },
           ].map((s) => (
             <div key={s.label}>
               <span className={`material-symbols-outlined text-xl ${s.color} block mb-1`} style={{ fontVariationSettings: "'FILL' 1" }}>{s.icon}</span>
               <p className={`font-headline text-2xl font-bold ${s.color}`}>{s.value}</p>
-              <p className="text-[9px] font-semibold uppercase tracking-widest text-[#AEAEB2] mt-0.5">{s.label}</p>
+              <p className="text-[9px] font-semibold uppercase tracking-widest text-[#AA7790] mt-0.5">{s.label}</p>
             </div>
           ))}
         </div>

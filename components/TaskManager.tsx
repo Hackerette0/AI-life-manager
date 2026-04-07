@@ -30,15 +30,15 @@ function isEnergyMatch(taskEnergy: EnergyRequired, userEnergy: EnergyLevel): boo
 function priorityChip(priority: TaskPriority): string {
   return {
     high:   "text-[#FF3B30]    border-red-400/30    bg-red-400/10",
-    medium: "text-[#FF9500] border-yellow-400/30 bg-yellow-400/10",
-    low:    "text-[#34C759]  border-[#34C759]/25  bg-[#34C759]/10",
+    medium: "text-[#FFB830] border-yellow-400/30 bg-yellow-400/10",
+    low:    "text-[#FF3D9A]  border-[#FF3D9A]/25  bg-[#FF3D9A]/10",
   }[priority];
 }
 
 function trackStyle(value: number, min: number, max: number) {
   const pct = ((value - min) / (max - min)) * 100;
   return {
-    background: `linear-gradient(to right, #007AFF 0%, #007AFF ${pct}%, #E5E5EA ${pct}%, #E5E5EA 100%)`,
+    background: `linear-gradient(to right, #FFD60A 0%, #FFD60A ${pct}%, #E5E5EA ${pct}%, #E5E5EA 100%)`,
   };
 }
 
@@ -91,16 +91,16 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
   ];
 
   return (
-    <div className="bg-white rounded-2xl border border-[#E5E5EA] shadow-sm overflow-hidden">
+    <div className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between p-5 border-b border-[#E5E5EA]">
+      <div className="flex items-center justify-between p-5 border-b border-[#2A2A2A]">
         <div className="flex items-center gap-3">
-          <span className="material-symbols-outlined text-[#007AFF] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+          <span className="material-symbols-outlined text-[#FFD60A] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
             task_alt
           </span>
           <div>
-            <h3 className="text-[18px] font-bold text-[#1C1C1E]">Today&apos;s Protocol</h3>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">
+            <h3 className="text-[18px] font-bold text-[#FFFDE7]">Today&apos;s Protocol</h3>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">
               {counts.pending} pending · {counts.in_progress} active · {counts.done} done
             </p>
           </div>
@@ -109,8 +109,8 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
           onClick={() => setShowForm(!showForm)}
           className={`interactive-scale flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest font-bold transition-all ${
             showForm
-              ? "bg-[#F2F2F7] border border-[#E5E5EA] text-[#6C6C70]"
-              : "bg-[#007AFF]/10 border border-[#007AFF]/30 text-[#007AFF] hover:bg-primary/30"
+              ? "bg-[#0C0C0C] border border-[#2A2A2A] text-[#FF9FCA]"
+              : "bg-[#FFD60A]/10 border border-[#FFD60A]/30 text-[#FFD60A] hover:bg-primary/30"
           }`}
         >
           <span className="material-symbols-outlined text-sm">{showForm ? "close" : "add"}</span>
@@ -120,24 +120,24 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
 
       {/* Add form */}
       {showForm && (
-        <div className="p-5 border-b border-[#E5E5EA] bg-[#F2F2F7] animate-slide-up space-y-4">
+        <div className="p-5 border-b border-[#2A2A2A] bg-[#0C0C0C] animate-slide-up space-y-4">
           <input
             type="text" value={title} onChange={(e) => setTitle(e.target.value)}
             placeholder="What needs to get done?"
             autoFocus
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-            className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-4 py-3 text-sm text-[#1C1C1E] placeholder-[#C6C6C8] focus:outline-none focus:border-[#007AFF]/40 focus:ring-1 focus:ring-[#007AFF]/20 transition-all"
+            className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-4 py-3 text-sm text-[#FFFDE7] placeholder-[#C6C6C8] focus:outline-none focus:border-[#FFD60A]/40 focus:ring-1 focus:ring-[#FFD60A]/20 transition-all"
           />
           <textarea
             value={desc} onChange={(e) => setDesc(e.target.value)}
             placeholder="Details... (optional)"
             rows={2}
-            className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-4 py-3 text-sm text-[#3C3C43] placeholder-[#C6C6C8] resize-none focus:outline-none focus:border-[#007AFF]/40 transition-all"
+            className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-4 py-3 text-sm text-[#FF9FCA] placeholder-[#C6C6C8] resize-none focus:outline-none focus:border-[#FFD60A]/40 transition-all"
           />
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-2">Energy needed</p>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-2">Energy needed</p>
               <div className="flex gap-1.5">
                 {energyOptions.map((o) => (
                   <button
@@ -146,8 +146,8 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
                     title={o.label}
                     className={`flex-1 py-2 rounded-lg text-sm border transition-all interactive-scale ${
                       energyReq === o.value
-                        ? "border-primary-fixed/40 bg-[#007AFF]/10 text-[#1C1C1E]"
-                        : "border-[#E5E5EA] bg-[#F2F2F7] text-[#8E8E93] hover:border-[#007AFF]/30"
+                        ? "border-primary-fixed/40 bg-[#FFD60A]/10 text-[#FFFDE7]"
+                        : "border-[#2A2A2A] bg-[#0C0C0C] text-[#AA7790] hover:border-[#FFD60A]/30"
                     }`}
                   >
                     {o.icon}
@@ -156,11 +156,11 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
               </div>
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93] mb-2">Priority</p>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790] mb-2">Priority</p>
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value as TaskPriority)}
-                className="w-full bg-[#F8F8F8] border border-[#E5E5EA] rounded-lg px-3 py-2 text-xs text-[#3C3C43] focus:outline-none focus:border-[#007AFF]/40"
+                className="w-full bg-[#141414] border border-[#2A2A2A] rounded-lg px-3 py-2 text-xs text-[#FF9FCA] focus:outline-none focus:border-[#FFD60A]/40"
               >
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
@@ -171,8 +171,8 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
 
           <div>
             <div className="flex justify-between items-baseline mb-2">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#8E8E93]">Estimated time</p>
-              <span className="font-headline text-lg font-bold text-[#007AFF]">{minutes} min</span>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">Estimated time</p>
+              <span className="font-headline text-lg font-bold text-[#FFD60A]">{minutes} min</span>
             </div>
             <input
               type="range" min={5} max={240} step={5} value={minutes}
@@ -187,8 +187,8 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
             disabled={!title.trim()}
             className={`glimmer-btn w-full py-3 rounded-lg font-label text-[10px] uppercase tracking-[0.2em] font-bold transition-all ${
               title.trim()
-                ? "bg-gradient-to-r bg-[#007AFF] from-[#007AFF] to-[#007AFF] text-[#1C1C1E] shadow-[0_4px_16px_rgba(0,122,255,0.25)] interactive-scale"
-                : "bg-[#F8F8F8] text-[#AEAEB2] cursor-not-allowed"
+                ? "bg-gradient-to-r bg-[#FFD60A] from-[#FFD60A] to-[#FFD60A] text-[#FFFDE7] shadow-[0_4px_16px_rgba(0,122,255,0.25)] interactive-scale"
+                : "bg-[#141414] text-[#AA7790] cursor-not-allowed"
             }`}
           >
             Add Task
@@ -197,15 +197,15 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
       )}
 
       {/* Filter tabs */}
-      <div className="flex border-b border-[#E5E5EA]">
+      <div className="flex border-b border-[#2A2A2A]">
         {filterTabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setFilter(tab.id)}
             className={`flex-1 py-3 text-[10px] font-semibold uppercase tracking-widest transition-all ${
               filter === tab.id
-                ? "text-[#007AFF] border-b-2 border-primary-fixed"
-                : "text-[#8E8E93] hover:text-[#6C6C70]"
+                ? "text-[#FFD60A] border-b-2 border-primary-fixed"
+                : "text-[#AA7790] hover:text-[#FF9FCA]"
             }`}
           >
             {tab.label}
@@ -214,11 +214,11 @@ export default function TaskManager({ tasks, energyLevel, onAdd, onUpdate, onDel
       </div>
 
       {/* Task list */}
-      <div className="divide-y divide-[#F2F2F7]">
+      <div className="divide-y divide-[#222222]">
         {sorted.length === 0 && (
           <div className="py-10 text-center">
             <span className="material-symbols-outlined text-4xl text-[#C6C6C8] block mb-2">checklist</span>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AEAEB2]">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#AA7790]">
               {filter === "all" ? "No tasks yet — add one above" : `No ${filter.replace("_", " ")} tasks`}
             </p>
           </div>
@@ -262,10 +262,10 @@ function TaskRow({
         <span
           className={`material-symbols-outlined text-xl transition-colors ${
             task.status === "done"
-              ? "text-[#34C759]"
+              ? "text-[#FF3D9A]"
               : task.status === "in_progress"
-              ? "text-[#007AFF]"
-              : "text-[#AEAEB2] group-hover:text-[#8E8E93]"
+              ? "text-[#FFD60A]"
+              : "text-[#AA7790] group-hover:text-[#AA7790]"
           }`}
           style={{ fontVariationSettings: task.status === "done" ? "'FILL' 1" : "'FILL' 0" }}
         >
@@ -280,11 +280,11 @@ function TaskRow({
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2">
           <p className={`text-sm font-medium leading-snug ${
-            task.status === "done" ? "line-through text-[#8E8E93]" : "text-white/90"
+            task.status === "done" ? "line-through text-[#AA7790]" : "text-white/90"
           }`}>
             {task.title}
             {isMatch && energyLevel && (
-              <span className="ml-1.5 text-[#34C759] text-xs" title="Good energy match">✦</span>
+              <span className="ml-1.5 text-[#FF3D9A] text-xs" title="Good energy match">✦</span>
             )}
           </p>
           <span className={`shrink-0 text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full border ${priorityChip(task.priority)}`}>
@@ -292,9 +292,9 @@ function TaskRow({
           </span>
         </div>
         {task.description && (
-          <p className="text-xs text-[#8E8E93] mt-0.5 truncate">{task.description}</p>
+          <p className="text-xs text-[#AA7790] mt-0.5 truncate">{task.description}</p>
         )}
-        <p className="font-label text-[9px] text-[#AEAEB2] mt-1 uppercase tracking-wider">
+        <p className="font-label text-[9px] text-[#AA7790] mt-1 uppercase tracking-wider">
           {energyIcon} {task.estimatedMinutes}min
         </p>
       </div>

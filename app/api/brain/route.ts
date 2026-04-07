@@ -1,7 +1,10 @@
-import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 import { NextRequest } from "next/server";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://openrouter.ai/api/v1",
+});
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,26 +40,34 @@ Answer the user's questions based on this data. Be conversational, specific, and
 
     const stream = new ReadableStream({
       async start(controller) {
-        const response = await client.messages.stream({
-          model: "claude-opus-4-5",
-          max_tokens: 1024,
-          system: systemPrompt,
-          messages: [{ role: "user", content: query }],
-        });
+        try {
+          const response = await client.chat.completions.create({
+            model: "qwen/qwen3.6-plus:free",
+            max_tokens: 1024,
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: query },
+            ],
+            stream: true,
+          });
 
-        for await (const chunk of response) {
-          if (
-            chunk.type === "content_block_delta" &&
-            chunk.delta.type === "text_delta"
-          ) {
-            controller.enqueue(
-              encoder.encode(`data: ${JSON.stringify({ text: chunk.delta.text })}\n\n`)
-            );
+          for await (const chunk of response) {
+            const text = chunk.choices[0]?.delta?.content || "";
+            if (text) {
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
+              );
+            }
           }
-        }
 
-        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-        controller.close();
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+          controller.close();
+        } catch (error) {
+          const msg = error instanceof Error ? error.message : "Unknown error";
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: `Error: ${msg}` })}\n\n`));
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+          controller.close();
+        }
       },
     });
 
